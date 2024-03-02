@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+ <title>Task 3</title>
+</head>
+
+<body>
+ <h1>Task #3</h1>
+ <h4><a href="../index.html">Back</a></h4>
+ <p>
+  Задача 3. Дано вартість одиниці товару і кількість. Знайти загальну вартість та ПДВ (5% від загальної вартості).
+ </p>
+
+ <script>
+  let quantityItems = parseInt(prompt("Кількість одиниць товару", 0))
+  let priceItem = parseFloat(prompt("Вартість одиниці товару", 0))
+  let tax = 5
+  let totalPriceItemsWithTax = quantityItems * priceItem + tax * (quantityItems * priceItem) / 100
+  document.write(`Кількість одиниць товару ${quantityItems} <br> Вартість одиниці товару ${priceItem} грн <br> Загальна варість товару з ПДВ складає ${totalPriceItemsWithTax} грн`)
+ </script>
+</body>
+
+</html>

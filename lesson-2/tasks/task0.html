@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+  <title>Task 0</title>
+</head>
+
+<body>
+  <h1>Task #0</h1>
+  <h4><a href="../index.html">Back</a></h4>
+  <h3>Задача 0. Обчислити значення виразів</h3>
+  <ol>
+    <li>
+      S1 = a + 12 + b
+    </li>
+    <li>
+      S2 = Math.sqrt((a + b) / 2a)
+    </li>
+    <li>
+      S3 = Math.sqbrt((a + b) * c)
+    </li>
+    <li>
+      S4 = Math.sin(a / (-b))
+    </li>
+  </ol>
+
+  <script>
+    let firstNum = parseInt(prompt("Your first number", 1))
+    let secondNum = parseInt(prompt("Your second number", 2))
+    let thirdNum = parseInt(prompt("Your third number", 3))
+
+    let firstResult = firstNum + 12 + secondNum
+    let secondResult = Math.sqrt((firstNum + secondNum) / 2 * firstNum)
+    let thirdResult = Math.cbrt((firstNum + secondNum) * thirdNum)
+    let forthResult = Math.sin(firstNum / (-secondNum))
+    document.write(
+      `<h3>Результат:</h3>
+  <ol>
+    <li>S1 = ${firstResult}</li>
+    <li>S2 = ${secondResult}</li>
+    <li>S3 = ${thirdResult}</li>
+    <li>S4 = ${forthResult}</li>
+   </ol>`
+    )
+  </script>
+</body>
+
+</html>

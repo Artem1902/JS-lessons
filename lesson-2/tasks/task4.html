@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+ <title>Task 4</title>
+</head>
+
+<body>
+ <h1>Task #4</h1>
+ <h4><a href="../index.html">Back</a></h4>
+ <p>
+  Задача 4. Дано довжину у сантиметрах. Визначати скільки це метрів і кілометрів.
+ </p>
+ <script>
+  let lengthSm = parseFloat(prompt("Кількість сантиметрів", 0))
+  let resultMet = lengthSm / 100
+  let resultKm = lengthSm / 1000
+
+  document.write(`Обраховано, що ${lengthSm} см - це ${resultMet} м та ${resultKm} км`)
+ </script>
+</body>
+
+</html>

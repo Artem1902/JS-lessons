@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+  <title>Task 6</title>
+</head>
+
+<body>
+  <h1>Task #6</h1>
+  <h4><a href="../index.html">Back</a></h4>
+  <p>
+    Задача 6. З клавіатури вводяться вартість товару та кількість одиниць 3 товарів. Обчислити вартість кожного товару
+    окремо та загальну вартість. Вивести чек (як у супермаркеті) використовуючи елементи розмітки.
+  </p>
+
+  <script>
+    let firstGoods = parseInt(prompt("Введіть кількість товару №1", 1))
+    let firstPrice = parseFloat(prompt("Введіть варість товару №1", 1))
+    let secondGoods = parseInt(prompt("Введіть кількість товару №2", 1))
+    let secondPrice = parseFloat(prompt("Введіть варість товару №2", 1))
+    let thirdGoods = parseInt(prompt("Введіть кількість товару №3", 1))
+    let thirdPrice = parseFloat(prompt("Введіть варість товару №3", 1))
+
+    let firstTotal = firstGoods * firstPrice
+    let secondTotal = secondGoods * secondPrice
+    let thirdTotal = thirdGoods * thirdPrice
+
+    let allPrice = firstTotal + secondTotal + thirdTotal
+
+    document.write(`
+   <table style="border:2px solid blue">
+    <tr>
+     <th colspan="2">Касовий чек</th>
+     </tr>
+     <tr>
+      <td colspan="2">Товар № 1</td>
+     </tr>
+     <tr> 
+      <td>${firstGoods} шт.</td>
+      <td>${firstTotal} грн.</td>
+      </tr>
+      <tr>
+      <td colspan="2">Товар № 2</td>
+     </tr>
+     <tr> 
+      <td>${secondGoods} шт.</td>
+      <td>${secondTotal} грн.</td>
+      </tr>
+      <tr>
+      <td colspan="2">Товар № 3</td>
+     </tr>
+     <tr> 
+      <td>${thirdGoods} шт.</td>
+      <td>${thirdTotal} грн.</td>
+      </tr>
+   <tr>
+    <td>До сплати:</td>
+    <td>${allPrice} грн.</td>
+    </tr>
+    </table>
+  `)
+  </script>
+</body>
+
+</html>

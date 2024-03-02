@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+ <title>Task 7</title>
+</head>
+
+<body>
+ <h1>Task #7</h1>
+ <h4><a href="../index.html">Back</a></h4>
+ <p>
+  Задача 7. Знайти суму випадкового номера місяця (від 1 до 12) та випадкового номера дня (від 0 до 6).
+ </p>
+
+ <script>
+  let minMonth = 1
+  let maxMonth = 12
+  let minDay = 0
+  let maxDay = 6
+  let randomMonth = minMonth + Math.floor(Math.random() * (maxMonth - minMonth + 1))
+  let randomDay = minDay + Math.floor(Math.random() * (maxDay - minDay + 1))
+  let sumMonthsDays = randomMonth + randomDay
+
+  document.write(`
+  Випадковий номер місяця: ${randomMonth}<br>
+  Випадковий номер дня: ${randomDay}<br>
+  Сума випадкового дня та місяця: ${sumMonthsDays}
+  `)
+ </script>
+</body>
+
+</html>

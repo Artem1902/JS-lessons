@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+ <title>Task 2</title>
+</head>
+
+<body>
+ <h1>Task #2</h1>
+ <h4><a href="../index.html">Back</a></h4>
+ <p>
+  Задача 2. Дано рік народження (дата: 1 січня) та поточний рік. Знайти кількість років.
+ </p>
+
+ <script>
+  let currentYear = parseInt(prompt("Поточний рік", 2024))
+  let bornYear = parseInt(prompt("Ви народились у", 1980))
+  let totalYear = currentYear - bornYear
+  document.write(`Ви народились у ${bornYear} році <br> Вам ${totalYear} роки(ів)`)
+ </script>
+</body>
+
+</html>
