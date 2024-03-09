@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+ <title>Task 3</title>
+</head>
+
+<h1>Task #3</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+ Випадковим чином генерується число від 1 до 5. Спробуйте вгадати число за 2 спроби.
+</p>
+
+<script>
+ const minNum = 1
+ const maxNum = 5
+ const randomNumber = minNum + Math.floor(Math.random() * (maxNum - minNum + 1))
+ const firstAttempt = parseInt(prompt('Вгадайте число від 1 до 5', 1))
+ console.log(randomNumber)
+ if (firstAttempt === randomNumber) document.write('Вгадав з першої спроби')
+ else {
+  const secondAttempt = parseInt(prompt('Вгадайте число від 1 до 5', 1))
+  if (secondAttempt === randomNumber) document.write('Вгадав з другої спроби')
+  else document.write('Не вгадав')
+ }
+
+
+
+
+</script>
+
+</html>

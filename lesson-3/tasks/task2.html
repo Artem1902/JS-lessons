@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+ <title>Task 2</title>
+</head>
+
+<h1>Task #2</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+ З клавіатури вводиться ціна товару і кількість грошей. Якщо грошей не вистачає то відмовляємо у покупці, інакше, якщо
+ ще залишаються гроші, то пропонуємо купити лотерею за 4 грн.
+</p>
+
+<script>
+ const lotteryPrice = 4
+ const priceItem = parseFloat(prompt('Ціна товару', 0))
+ const personMoney = parseFloat(prompt('Кількість грошей', 0))
+ if (personMoney < priceItem) document.write('Не достатньо коштів')
+ else if ((personMoney - priceItem) >= lotteryPrice) document.write('Пропонуємо придбати лотерею')
+ else document.write('Коштів достатньо для купівлі')
+</script>
+
+</html>

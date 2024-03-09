@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+  <title>Task 4</title>
+</head>
+
+<h1>Task #4</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+  З клавіатури вводиться вік людини. Вивести на екран ким він є (дитиною у садочку, школярем, студентом, працівником,
+  пенсіонером).
+</p>
+
+<script>
+  const personAge = parseInt(prompt('Введіть вік особи', 1))
+  let res
+  switch (true) {
+    case personAge < 7: res = 'Дитина у садочку'
+      break
+    case personAge < 17: res = 'Школяр'
+      break
+    case personAge < 22: res = 'Студент'
+      break
+    case personAge < 60: res = 'Працівник'
+      break
+    case personAge >= 60 && personAge < 120: res = 'Пенсіонер'
+      break
+    default: res = 'Не правильно зазначений вік'
+      break
+  }
+  document.write(res)
+</script>
+
+</html>
