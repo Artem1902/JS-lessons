@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+ <title>Task 15</title>
+</head>
+
+<h1>Task #15</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+ Задача 15. Користувача поступово вводить показники температури протягом року. Знайти середню температуру.
+
+</p>
+
+<script>
+ let averageTemp = 0
+ let currentTemp = 0
+ let totalTemp = 0
+ let days = 0
+
+ do {
+  currentTemp = parseFloat(prompt('Введіть поточну температуру'))
+  if (isNaN(currentTemp)) break
+  totalTemp += currentTemp
+  days++
+  averageTemp = totalTemp / days
+ } while (isFinite(currentTemp));
+
+ document.write(`Ви вводили поточну температуру днів: ${days}, середня температура складає: ${averageTemp}`)
+</script>
+
+
+</html>

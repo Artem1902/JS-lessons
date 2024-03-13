@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+ <title>Task 13</title>
+</head>
+
+<h1>Task #13</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+ 13. Морський бій. Комп’ютер випадково розташовує одиночний корабель на полі розміром N*M. Маючи К снарядів користувач
+ намагається потопити корабель.
+</p>
+
+<script>
+ const horizCell = parseInt(prompt('Введіть число клітинок поля бою по горизонталі'))
+ const verticCell = parseInt(prompt('Введіть число клітинок поля бою по вертикалі'))
+ const shotsNum = parseInt(prompt('Введіть число снарядів'))
+ const shipCell = 1 + Math.floor(Math.random() * horizCell * verticCell)
+ let userShot
+ let numCell = 1
+ document.write('<table border=2px>')
+ for (let i = 1; i <= horizCell; i++) {
+  document.write('<tr>')
+  for (let j = 1; j <= verticCell; j++) {
+   document.write(`<td>${numCell}</td>`)
+   numCell++
+  }
+  document.write('</tr>')
+ }
+ document.write('</table>')
+
+ for (let i = 1; i <= shotsNum; i++) {
+  userShot = parseInt(prompt(`Введіть номер комірки для пострілу від 1 до ${horizCell * verticCell}`))
+  if (shipCell === userShot) {
+   alert('Потопив')
+   break
+  }
+  else alert(`Мимо, пострілів залишилось: ${shotsNum - i} `)
+ }
+ alert(`Корабель був схований у клітинці № ${shipCell}`)
+</script>
+
+
+</html>

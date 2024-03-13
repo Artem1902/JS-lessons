@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+ <title>Task 12</title>
+</head>
+
+<h1>Task #12</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+ Задача 12. Ігровий автомат. Випадково вибираємо зображення у 3 позиціях. Вибір у кожній позиції вибирається як одне з
+ чотирьох зображень. Вивести ці зображення і повідомити виграш користувача (три перших зображення 100 грн, три других –
+ 200, три третіх – 500, три четвертих зображення – 1000грн). Використати цикли і switch (для вибору зображення за
+ номером).
+</p>
+
+<script>
+
+ let win = 0
+ let img1Count = 0
+ let img2Count = 0
+ let img3Count = 0
+ let img4Count = 0
+ let imgPath
+ for (let i = 0; i < 3; i++) {
+  const cell = 1 + Math.floor(Math.random() * 4)
+  switch (cell) {
+   case 1: imgPath = 'https://picsum.photos/id/1/200/200'
+    img1Count++
+    break;
+   case 2: imgPath = 'https://picsum.photos/id/10/200/200'
+    img2Count++
+    break
+   case 3: imgPath = 'https://picsum.photos/id/100/200/200'
+    img3Count++
+    break
+   case 4: imgPath = 'https://picsum.photos/id/99/200/200'
+    img4Count++
+    break
+  }
+  document.write(`<img src='${imgPath}'>`)
+ }
+
+ if (img1Count === 3) win = 100
+ if (img2Count === 3) win = 200
+ if (img3Count === 3) win = 500
+ if (img4Count === 3) win = 1000
+
+ document.write(`You win = ${win}`)
+</script>
+
+
+</html>

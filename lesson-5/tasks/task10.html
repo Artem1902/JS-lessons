@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+ <title>Task 10</title>
+</head>
+
+<h1>Task #10</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+ Задача 10. Знайти суму всіх непарних чисел, що знаходяться між заданими користувачем числами.
+</p>
+
+<script>
+ const num1 = parseInt(prompt('Number # 1'))
+ const num2 = parseInt(prompt('Number # 2'))
+ let sum = 0
+ for (let currentNumber = num1; currentNumber <= num2; currentNumber++) {
+  if (currentNumber % 2 === 0) continue
+  else sum += currentNumber
+ }
+
+ document.write(`Sum = ${sum}`)
+</script>
+
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+ <title>Task 1</title>
+</head>
+
+<h1>Task #1</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+ Задача 1. Вивести з використанням циклів маркований список з випадковими числами (1-100). Кількість випадкових чисел
+ вводиться користувачем. Приклад:
+</p>
+
+<script>
+ const qntRandomNumbers = parseInt(prompt('Введіть кількість випадкових чисел'))
+ document.write(
+  '<ul>')
+ for (let i = 0; i < qntRandomNumbers; i++) {
+  let randomNumber = 1 + Math.floor(Math.random() * 100)
+  document.write(`<li>${randomNumber}</li>`)
+  document.write('</ul>')
+ }
+</script>
+
+
+</html>
