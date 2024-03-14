@@ -15,11 +15,16 @@
 </p>
 
 <script>
- const num1 = parseInt(prompt('Number # 1'))
- const num2 = parseInt(prompt('Number # 2'))
+ let num1 = parseInt(prompt('Number # 1'))
+ let num2 = parseInt(prompt('Number # 2'))
  let sum = 0
  let count = 0
- for (let currentNumber = num1; currentNumber <= num2 && count < 5; currentNumber++) {
+ if (num1 > num2) {
+  let temp = num1
+  num1 = num2
+  num2 = temp
+ }
+ for (let currentNumber = num1 + 1; currentNumber <= num2 && count < 5; currentNumber++) {
   if (currentNumber % 2 === 0) continue
   else {
    sum += currentNumber
