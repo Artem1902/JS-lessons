@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+ <title>Task 14</title>
+</head>
+
+<h1>Task #14</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+ 14. Морський бій. Комп’ютер випадковим чином розміщує одиночний корамель на полі 5*5. З клавіатури поступово вводяться
+ координати пострілу поки корабель не буде потоплено. Спробуйте відоразити гру графічно.
+</p>
+
+<script>
+ document.write('<table border=2px>')
+ for (let celNum = 1; celNum <= 5; celNum++) {
+  document.write('<tr>')
+  for (let celLetter = 65; celLetter <= 69; celLetter++) {
+   document.write(`<td>${String.fromCharCode(celLetter)}${celNum}</td>`)
+  }
+  document.write('</tr>')
+ }
+ document.write('</table>')
+ let compShipHorizontal = String.fromCharCode(65 + Math.floor(Math.random() * (69 - 65 + 1)))
+ let compShipVertical = 1 + Math.floor(Math.random() * 5)
+ let compShipCell = compShipHorizontal + compShipVertical
+ for (let shots = 0; shots < 5; shots++) {
+  let userShotHorizontal = prompt('Your shot from A to E')
+  let userShotVertical = parseInt(prompt('Your shot from 1 to 5'))
+  let userShipCell = userShotHorizontal + userShotVertical
+  if (compShipCell === userShipCell) {
+   alert('Boom!')
+   break
+  }
+  else alert(`You missed ${4 - shots} shots left!`)
+ }
+ alert(`The ship was in ${compShipCell} cell!`)
+</script>
+
+</html>

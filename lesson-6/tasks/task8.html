@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 8</title>
+</head>
+
+<h1>Task #8</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    8. Щоденно спортзал відвідує певна кількість людей. Користувач вводить такі дані: скільки людей відвідало спортзал
+    за день та вік кожного відвідувача. Потрібно вивести вік найстаршого та наймолодшого відвідувачів, а також середній
+    вік всіх відвідувачів спортзалу за день.
+</p>
+
+<script>
+    let qntVisitors = parseInt(prompt('How many visitors?'))
+    let minAge = Infinity
+    let maxAge = -Infinity
+    let totalAge = 0
+    let averageAge = 0
+
+    for (let visitor = 1; visitor <= qntVisitors; visitor++) {
+        let visitorAge = parseInt(prompt(`Visitor #${visitor}. How old are they?`))
+        totalAge += visitorAge
+        if (visitorAge > maxAge) maxAge = visitorAge
+        if (visitorAge < minAge) minAge = visitorAge
+    }
+    averageAge = totalAge / qntVisitors
+    document.write(`Number of visitors: ${qntVisitors}. Min age = ${minAge}, max age = ${maxAge}, average age = ${averageAge}.`)
+</script>
+
+</html>

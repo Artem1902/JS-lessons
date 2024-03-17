@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+   <title>Task 16</title>
+</head>
+
+<h1>Task #16</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+   16. Танчики. На полі з 10 клітинок розміщують танк. За один крок танк може переміщуватися на відстань від 0 до 1 у
+   будь-якому напрямку (в межах поля). При влучанні броня танка пошкоджується на 30 балів (всього 100). Гра
+   продовжується
+   поки або не закінчаться снаряди (кількість вводиться з клавіатури) або не буде влучання. Спробуйте відоразити гру
+   графічно.
+</p>
+
+<script>
+   document.write('<table border=2px>')
+   for (let celNum = 1; celNum <= 10; celNum++) {
+      document.write('<tr>')
+      for (let celLetter = 65; celLetter <= 75; celLetter++) {
+         document.write(`<td>${String.fromCharCode(celLetter)}${celNum}</td>`)
+      }
+      document.write('</tr>')
+   }
+   document.write('</table>')
+   alert('Turn on "Console"')
+   let qntShots = parseInt(prompt('Enter number of shots'))
+   let compTankHorizontal = String.fromCharCode(65 + Math.floor(Math.random() * (75 - 65 + 1)))
+   let compTankVertical = 1 + Math.floor(Math.random() * 10)
+   let compTankCell
+   let userShotHorizontal
+   let userShotVertical
+   let armor = 100
+
+   for (let shots = 0; shots < qntShots && armor > 0; shots++) {
+
+      userShotHorizontal = prompt('Your shot from A to K')
+      if (userShotHorizontal === null) break
+
+      userShotVertical = parseInt(prompt('Your shot from 1 to 10'))
+      if (isNaN(userShotVertical)) break
+
+      let userTankCell = userShotHorizontal + userShotVertical
+
+      compTankCell = compTankHorizontal + compTankVertical
+
+      console.log(`Current position of the tank: ${compTankCell}. Try to hit it!`)
+
+      let changeDirection = 1 + Math.floor(Math.random() * 4)
+
+      let changeStep = Math.floor(Math.random() * 2)
+      console.log(changeStep)
+
+      console.log('The tank ran away! Try again!')
+      console.log(`
+  A1 | B1 | C1 | D1 | E1 | F1 | G1 | H1 | I1 | J1 | K1
+  A2 | B2 | C2 | D2 | E2 | F2 | G2 | H2 | I2 | J2 | K2
+  A3 | B3 | C3 | D3 | E3 | F3 | G3 | H3 | I3 | J3 | K3
+  A4 | B4 | C4 | D4 | E4 | F4 | G4 | H4 | I4 | J4 | K4
+  A5 | B5 | C5 | D5 | E5 | F5 | G5 | H5 | I5 | J5 | K5
+  A6 | B6 | C6 | D6 | E6 | F6 | G6 | H6 | I6 | J6 | K6
+  A7 | B7 | C7 | D7 | E7 | F7 | G7 | H7 | I7 | J7 | K7
+  A8 | B8 | C8 | D8 | E8 | F8 | G8 | H8 | I8 | J8 | K8
+  A9 | B9 | C9 | D9 | E9 | F9 | G9 | H9 | I9 | J9 | K9
+  A10| B10| C10| D10| E10| F10| G10| H10| I10| J10| K10
+  `)
+      if (changeDirection === 1) {
+         if (compTankVertical - changeStep < 1) compTankVertical = 1
+         else compTankVertical = compTankVertical - changeStep
+      }
+      else if (changeDirection === 2) {
+         let tempCompHor = compTankHorizontal.charCodeAt(0)
+         if (tempCompHor + changeStep > 75) tempCompHor = 75
+         else tempCompHor = tempCompHor + changeStep
+         compTankHorizontal = String.fromCharCode(tempCompHor)
+      }
+      else if (changeDirection === 3) {
+         if (compTankVertical + changeStep > 10) compTankVertical = 10
+         else compTankVertical = compTankVertical + changeStep
+      }
+      else {
+         let tempCompHor = compTankHorizontal.charCodeAt(0)
+         if (tempCompHor - changeStep < 65) tempCompHor = 65
+         else tempCompHor = tempCompHor - changeStep
+         compTankHorizontal = String.fromCharCode(tempCompHor)
+      }
+
+      if (compTankCell === userTankCell) {
+         armor = armor - 30
+         alert(`Boom! The tank was in ${compTankCell} cell, armor: ${armor}!`)
+      }
+      else {
+         if (qntShots - shots - 1 > 0) {
+            alert(`You missed ${qntShots - shots - 1} shots left!`)
+         }
+      }
+   }
+   if (isNaN(qntShots)) alert("The game has not started!")
+   else if (userShotHorizontal === null || isNaN(userShotVertical)) alert("Game canceled!")
+   else if (armor < 0) alert(`You win! The tank was in ${compTankCell} cell!`)
+   else alert(`You lose! The tank was in ${compTankCell} cell!`)
+</script>
+
+</html>

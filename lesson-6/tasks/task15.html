@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+ <title>Task 15</title>
+</head>
+
+<h1>Task #15</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+ 15. Тир. На полі з 10 клітинок розміщують зайця. За один крок заєць може стрибати на відстань від 0 до 3 позицій у
+ будь-якому напрямку. З клавіатури вводиться позиція пострілу. Гра продовжується поки у користувача не закінчаться
+ патрони (кількість вводиться з клавіатури) або не буде влучання. Спробуйте відоразити гру графічно.
+</p>
+
+<script>
+ document.write('<table border=2px>')
+ for (let celNum = 1; celNum <= 4; celNum++) {
+  document.write('<tr>')
+  for (let celLetter = 65; celLetter <= 68; celLetter++) {
+   document.write(`<td>${String.fromCharCode(celLetter)}${celNum}</td>`)
+  }
+  document.write('</tr>')
+ }
+ document.write('</table>')
+ alert('Turn on "Console"')
+ let qntShots = parseInt(prompt('Enter number of shots'))
+ let compRabbitHorizontal = String.fromCharCode(65 + Math.floor(Math.random() * (68 - 65 + 1)))
+ let compRabbetVertical = 1 + Math.floor(Math.random() * 4)
+ let compRabbitCell
+ let userShotHorizontal
+ let userShotVertical
+ for (let shots = 0; shots < qntShots; shots++) {
+  compRabbitCell = compRabbitHorizontal + compRabbetVertical
+  userShotHorizontal = prompt('Your shot from A to D')
+  if (userShotHorizontal === null) break
+  userShotVertical = parseInt(prompt('Your shot from 1 to 4'))
+  if (isNaN(userShotVertical)) break
+  let userRabbitCell = userShotHorizontal + userShotVertical
+  console.log(`Current position of the rabbit: ${compRabbitCell}. Try to hit it!`)
+  if (compRabbitCell === userRabbitCell) {
+   alert('Boom!')
+   alert(`The rabbit was in ${compRabbitCell} cell!`)
+   break
+  }
+  else {
+   if (qntShots - shots - 1 > 0) {
+    alert(`You missed ${qntShots - shots - 1} shots left!`)
+    let changeDirection = 1 + Math.floor(Math.random() * 4)
+    let changeStep = Math.floor(Math.random() * 3)
+    console.log('The rabbit ran away! Try again!')
+    console.log(`A1 | B1 | C1 | D1
+A2 | B2 | C2 | D2
+A3 | B3 | C3 | D3
+A4 | B4 | C4 | D4`)
+    if (changeDirection === 1) {
+     if (compRabbetVertical - changeStep < 1) compRabbetVertical = 1
+     else compRabbetVertical = compRabbetVertical - changeStep
+    }
+    else if (changeDirection === 2) {
+     let tempCompHor = compRabbitHorizontal.charCodeAt(0)
+     if (tempCompHor + changeStep > 68) tempCompHor = 68
+     else tempCompHor = tempCompHor + changeStep
+     compRabbitHorizontal = String.fromCharCode(tempCompHor)
+    }
+    else if (changeDirection === 3) {
+     if (compRabbetVertical + changeStep > 4) compRabbetVertical = 4
+     else compRabbetVertical = compRabbetVertical + changeStep
+    }
+    else {
+     let tempCompHor = compRabbitHorizontal.charCodeAt(0)
+     if (tempCompHor - changeStep < 65) tempCompHor = 65
+     else tempCompHor = tempCompHor - changeStep
+     compRabbitHorizontal = String.fromCharCode(tempCompHor)
+    }
+   }
+  }
+ }
+ if (isNaN(qntShots)) alert("The game has not started!")
+ else if (userShotHorizontal === null || isNaN(userShotVertical)) alert("Game canceled!")
+ else alert(`You lose! The rabbit was in ${compRabbitCell} cell!`)
+</script>
+
+</html>
