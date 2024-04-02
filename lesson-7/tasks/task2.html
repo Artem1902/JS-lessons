@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 2</title>
+</head>
+
+<h1>Task #2</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 2. Створити функцію, яка за номером дня дозволяє з’ясувати чи є цей день робочим.
+</p>
+
+<script>
+    function getNameOfTheMonth(monthNumber) {
+        let result
+        switch (monthNumber) {
+            case 1: result = 'January'
+                break;
+            case 2: result = 'February'
+                break;
+            case 3: result = 'March'
+                break;
+            case 4: result = 'April'
+                break;
+            case 5: result = 'May'
+                break;
+            case 6: result = 'June'
+                break;
+            case 7: result = 'July'
+                break;
+            case 8: result = 'August'
+                break;
+            case 9: result = 'September'
+                break;
+            case 10: result = 'October'
+                break;
+            case 11: result = 'November'
+                break;
+            case 12: result = 'December'
+                break;
+            default: result = 'incorrect entered value'
+                break;
+        }
+        return result
+    }
+    const monthNumber = parseInt(prompt('Number of the month', 1))
+    const nameMonth = getNameOfTheMonth(monthNumber)
+    document.write(`Number of the month ${monthNumber} is ${nameMonth}`)
+</script>
+
+</html>
