@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 4</title>
+</head>
+
+<h1>Task #4</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 4. Дано послідовність номерів автомобілів. Підрахувати кількість номерів, які :
+    • починаються на букву «А»;
+    • перша і остання літери співпадають;
+    • складаються з більше ніш 5 символів;
+</p>
+
+<script>
+    function getNumbersAuto(numbersAutoArr) {
+        let startA = 0
+        let firstAndLast = 0
+        let moreThanFive = 0
+        for (let i = 0; i < numbersAutoArr.length; i++) {
+            let currentNumber = numbersAutoArr[i]
+            if (currentNumber.length > 5) moreThanFive++
+            if (currentNumber[0] === 'A') startA++
+            if (currentNumber[0] === currentNumber[currentNumber.length - 1]) firstAndLast++
+        }
+        numbersResult.push(startA)
+        numbersResult.push(firstAndLast)
+        numbersResult.push(moreThanFive)
+        return numbersResult
+    }
+    let numbersAutoArr = ['AA2010AA', 'BB1120AA', 'AA432', 'CC2332PC', 'BB23', 'AB21', 'A1235A']
+    let numbersResult = []
+    const numbersAuto = getNumbersAuto(numbersAutoArr)
+    document.write(`startA = ${numbersResult[0]}<br> firstAndLast=${numbersResult[1]}<br> moreThanFive = ${numbersResult[2]}`)
+</script>
+
+</html>

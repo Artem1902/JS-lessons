@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 9</title>
+</head>
+
+<h1>Task #9</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 9. Морський бій. Користувач вводить кількість клітинок одновимірного масиву та кількість одиночних кораблів.
+    Комп’ютер довільно розміщує ці одиночні кораблі у масиві по один у клітинці (якщо у клітинці 0, то клітинка пуста,
+    якщо 1 – то це означає, що там є корабель. Користувач вводить номер клітинки, куди стріляє. Гра продовжується до тих
+    пір, поки не будуть потоплені усі кораблі.
+</p>
+
+<script>
+    function getBattlelField(qntCell, qntShips) {
+        let shipArr = []
+        for (let i = 0; i < qntShips; i++) {
+            let ship = Math.floor(Math.random() * qntCell)
+            console.log(`Ship ${ship}`)
+            shipArr[ship] = 1
+        }
+        console.log(shipArr)
+        return shipArr
+    }
+    function getStartBattle(battlelField, qntCell, qntShips) {
+        let targettedShips = 0
+        let qntShots = 0
+        while (targettedShips !== qntShips) {
+            let shot = parseInt(prompt(`Your shot from 1 to ${qntCell}`))
+            if (shot === null) break
+            if (isNaN(shot)) break
+            qntShots++
+            if (battlelField[shot - 1] === 1) {
+                targettedShips++
+                alert('Boom!')
+            }
+        }
+        return qntShots
+    }
+    let qntCell = parseInt(prompt('quantity cell'))
+    let qntShips = parseInt(prompt('quantity ships'))
+    const battlelField = getBattlelField(qntCell, qntShips)
+    console.log(battlelField)
+    const startBattle = getStartBattle(battlelField, qntCell, qntShips)
+    document.write(`You win, quantity ships: ${qntShips}, quantity shots: ${startBattle}.`)
+</script>
+
+</html>

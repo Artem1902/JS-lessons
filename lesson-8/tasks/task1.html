@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 1</title>
+</head>
+
+<h1>Task #1</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 1. Дано масив, який містить оцінки з К предметів. Знайти середній бал і з’ясувати до якої категорії він
+    відноситься (відмінник, двійочник (має хоча би одну двійку), хорошист (оцінки добре і відмінно), трійочник(є хоча би
+    одна трійка)).
+</p>
+
+<script>
+    function getRandomScore(qnttySubjects, minScore = 2, maxScore = 5) {
+        let arrScore = []
+        for (let i = 0; i < qnttySubjects; i++) {
+            let score = minScore + Math.floor(Math.random() * ((maxScore - minScore + 1)))
+            arrScore.push(score)
+        }
+        return arrScore
+    }
+    function countAverageScores(randomArrScore) {
+        let averageScore = 0
+        let sum = 0
+        for (let i = 0; i < randomArrScore.length; i++) {
+            sum += randomArrScore[i]
+        }
+        return averageRes = Math.floor(sum / randomArrScore.length)
+
+    }
+    function getCategoryScore(randomArrScore) {
+        let category
+        let minScoreInArr = randomArrScore[0]
+        for (let i = 1; i < randomArrScore.length; i++) {
+            if (randomArrScore[i] < minScoreInArr) minScoreInArr = randomArrScore[i]
+        }
+        switch (minScoreInArr) {
+            case 2: category = 'двійочник'
+                break;
+            case 3: category = 'трійочник'
+                break;
+            case 4: category = 'хорошист'
+                break;
+            case 5: category = 'відмінник'
+                break;
+            default: throw new new Error('Something wrong')
+                break;
+        }
+        return category
+    }
+    const qnttySubjects = parseInt(prompt('What is quantity of subjects?'))
+    const minScore = 2
+    const maxScore = 5
+    const randomArrScore = getRandomScore(qnttySubjects, minScore, maxScore)
+    const averageScore = countAverageScores(randomArrScore)
+    const categoryScore = getCategoryScore(randomArrScore)
+    document.write(`randomArrScore = ${randomArrScore}<br> averageScore=${averageScore}<br> categoryScore = ${categoryScore}`)
+</script>
+
+</html>
