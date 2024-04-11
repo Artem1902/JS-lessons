@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 8</title>
+</head>
+
+<h1>Task #8</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    8. Дано масив номерів авто. Сформувати новий масив тих, які починаються на «А»
+</p>
+
+<script>
+    const numbersList = ['AA1000AA', 'BB2222BB', 'CC3333CC', 'AD4444CC', 'FF3344BB']
+    const newNumbersList = []
+    for (const num of numbersList) {
+        if (num[0] === "A") newNumbersList.push(num)
+    }
+    document.write(`numbersList ${numbersList}<br>`)
+
+    document.write(`newNumbersList ${newNumbersList}`)
+</script>
+
+</html>

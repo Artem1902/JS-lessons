@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 7</title>
+</head>
+
+<h1>Task #7</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    7.Дано масив цін. Змінити цей масив так, що на ціни товарів, які більші за 1000 грн. дати 30% знижки.
+</p>
+
+<script>
+    const numbersList = [3101, 2, 23, 1120, 1555, 40, 10000]
+
+    numbersList.forEach((num, index, arr) => {
+        if (num > 1000) arr[index] = num * (1 - 30 / 100)
+    })
+
+    document.write(numbersList)
+</script>
+
+</html>

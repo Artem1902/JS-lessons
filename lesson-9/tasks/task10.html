@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 10</title>
+</head>
+
+<h1>Task #10</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    10. Дано масив цін у грн. Податок складає 20%. Сформувати масив, який буде містити величину сплаченого податку у
+    грн.
+</p>
+
+<script>
+    const pricesList = [3101, 2, 23, 1120, 1555, 40, 10000]
+    const tax = 0.2
+    let allTaxesValue = 0
+    for (const price of pricesList) {
+        allTaxesValue += price * tax
+    }
+
+    document.write(`pricesList = ${pricesList}<br> allTaxesValue = ${allTaxesValue}`)
+
+</script>
+
+</html>
