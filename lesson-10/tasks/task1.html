@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 1</title>
+</head>
+
+<h1>Task #1</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача. Дано історію цін на цінні папери за деякий період (згенерувати від 1 до 10000)
+    1)Сформувати новий масив, у якому є тільки ті, що більші за 1000 грн.
+</p>
+
+<script>
+    function generatePrices(months, minValue, maxValue) {
+        let pricesList = []
+        for (let i = 0; i < months; i++) {
+            let price = minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+            pricesList.push(price)
+        }
+        return pricesList
+    }
+
+    const minValue = 1
+    const maxValue = 10000
+    const months = parseInt(prompt('quantity months'))
+    const generatedPriceList = generatePrices(months, minValue, maxValue)
+    document.write(`List = ${generatedPriceList}<br>`)
+
+    const moreThan1000List = generatedPriceList.filter(num => num > 1000)
+
+    document.write(`moreThan1000List = ${moreThan1000List}`)
+</script>
+
+</html>

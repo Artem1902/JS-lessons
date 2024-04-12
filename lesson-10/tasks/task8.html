@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 8</title>
+</head>
+
+<h1>Task #8</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    8.Підрахувати кількість цін, що більше за 1000
+</p>
+
+<script>
+    function generatePrices(months, minValue, maxValue) {
+        let pricesList = []
+        for (let i = 0; i < months; i++) {
+            let price = minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+            pricesList.push(price)
+        }
+        return pricesList
+    }
+    const minValue = 1
+    const maxValue = 10000
+    const months = parseInt(prompt('quantity months'))
+    const generatedPriceList = generatePrices(months, minValue, maxValue)
+    document.write(`List = ${generatedPriceList}<br>`)
+
+
+    const qnttyPriceMoreThan1000 = generatedPriceList.reduce((prevValue, price) => price > 1000 ? prevValue + 1 : prevValue, 0)
+
+    document.write(`qnttyPriceMoreThan1000 = ${qnttyPriceMoreThan1000}`)
+</script>
+
+</html>

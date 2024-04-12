@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 4</title>
+</head>
+
+<h1>Task #4</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    4.Сформувати новий масив, що міститиме значення цін у відсотках стосовно максимального
+</p>
+
+<script>
+    function generatePrices(months, minValue, maxValue) {
+        let pricesList = []
+        for (let i = 0; i < months; i++) {
+            let price = minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+            pricesList.push(price)
+        }
+        return pricesList
+    }
+    const minValue = 1
+    const maxValue = 10000
+    const months = parseInt(prompt('quantity months'))
+    const generatedPriceList = generatePrices(months, minValue, maxValue)
+    document.write(`List = ${generatedPriceList}<br>`)
+
+    const maxPriceValue = generatedPriceList.reduce((max, currentValue) => Math.max(max, currentValue), -Infinity);
+
+    const percentToMaxValue = generatedPriceList.map(
+        (num, index, arr) => Math.round(num / maxPriceValue * 100)
+    )
+
+    document.write(`percentToMaxValue = ${percentToMaxValue}`)
+</script>
+
+</html>
