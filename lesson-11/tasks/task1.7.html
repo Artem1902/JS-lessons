@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 1.7.</title>
+</head>
+
+<h1>Task #1.7.</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 1. Знайти суми елементів у вказаній області<br>
+    1.7. У парних рядках – непарні стовпці, у непарних – парні.
+</p>
+
+<script>
+    function getRandomNum(minNum, maxNum) {
+        return minNum + Math.floor(Math.random() * (maxNum - minNum + 1))
+    }
+
+    function getRandomRowArr(length, minNum, maxNum) {
+        let arr = []
+        for (let i = 0; i < length; i++) {
+            let randomNum = getRandomNum(minNum, maxNum)
+            arr.push(randomNum)
+        }
+        return arr
+    }
+
+    function getRandomTable(rows, columns, minNum, maxNum) {
+        for (let i = 0; i < rows; i++) {
+            let randomRowArr = getRandomRowArr(columns, minNum, maxNum)
+            tableArr.push(randomRowArr)
+        }
+        return tableArr
+    }
+
+    let tableArr = []
+    const createTable = getRandomTable(4, 4, 1, 10)
+    let sum = 0
+
+    for (let row = 0; row < tableArr.length; row += 2) {
+        for (let col = 1; col < tableArr[row].length; col += 2) {
+            sum += tableArr[row][col]
+        }
+    }
+    for (let row = 1; row < tableArr.length; row += 2) {
+        for (let col = 0; col < tableArr[row].length; col += 2) {
+            sum += tableArr[row][col]
+        }
+    }
+
+    document.write(`Array = ${tableArr}<br>
+    Sum = ${sum}<br>`)
+</script>
+
+</html>

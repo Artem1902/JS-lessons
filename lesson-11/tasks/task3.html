@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 3</title>
+</head>
+
+<h1>Task #3</h1>
+<p>
+    Задача 3. Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів. Користувач
+    стріляє вказуючи координати. Гра продовжується поки не потоплено усі кораблі або у користувача не закінчаться
+    снаряди.
+</p>
+
+<script>
+    let shipAmount = 5
+    let shipPlaced = 0
+
+    function randomNum(min = 0, max = 5) {
+        return min + Math.floor(Math.random() * (max - min + 1))
+    }
+    function createBattleField(row, col) {
+        let arr = []
+        for (let index = 0; index < row; index++) {
+            let rowArr = new Array(col).fill(0)
+            arr.push(rowArr)
+        }
+        return arr
+    }
+    let battleFieldArr = createBattleField(6, 6)
+    console.log(battleFieldArr)
+
+
+    while (shipPlaced < shipAmount) {
+        let cell1 = randomNum()
+        let cell2 = randomNum()
+
+        if (battleFieldArr[cell1][cell2] !== 1) {
+            battleFieldArr[cell1][cell2] = 1
+            shipPlaced++
+        }
+    }
+
+    let qnttyShots = parseInt(prompt('How many shots?'))
+    if (qnttyShots === undefined || isNaN(qnttyShots)) qnttyShots = 0
+    1
+
+    while (shipAmount > 0 && qnttyShots > 0) {
+        let shotRow = parseInt(prompt(`Row from 1 to 6`) - 1)
+        console.log(shotRow)
+        if (shotRow === -1 || isNaN(shotRow)) break
+        let shotCol = parseInt(prompt(`Column from 1 to 6`) - 1)
+        if (shotCol === -1 || isNaN(shotCol)) break
+        qnttyShots--
+        if (battleFieldArr[shotRow][shotCol] === 1) {
+            alert('Boom!')
+            battleFieldArr[shotRow][shotCol] = 0
+            shipAmount--
+        }
+        else alert('Missed!')
+    }
+    if (shipAmount === 0) alert('You win!')
+    if (qnttyShots === 0) alert('You lose!')
+
+</script>
+
+</html>

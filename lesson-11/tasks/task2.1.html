@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 2.1.</title>
+</head>
+
+<h1>Task #2.1.</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 2. Дано інформацію про прибуток К магазинів протягом тижня. Знайти :<br>
+    2.1. загальний прибуток кожного масиву за тиждень;
+
+</p>
+
+<script>
+    function getRandomNum(minNum, maxNum) {
+        return minNum + Math.floor(Math.random() * (maxNum - minNum + 1))
+    }
+
+    function getRandomRowArr(length, minNum, maxNum) {
+        let arr = []
+        for (let i = 0; i < length; i++) {
+            let randomNum = getRandomNum(minNum, maxNum)
+            arr.push(randomNum)
+        }
+        return arr
+    }
+
+    function getRandomTable(rows, columns, minNum, maxNum) {
+        for (let i = 0; i < rows; i++) {
+            let randomRowArr = getRandomRowArr(columns, minNum, maxNum)
+            tableArr.push(randomRowArr)
+        }
+        return tableArr
+    }
+
+    let tableArr = []
+    const qnttyOfShops = parseInt(prompt('How many shops?'))
+    const createTable = getRandomTable(qnttyOfShops, 7, 1, 10)
+    let sum = 0
+    let arrOfSum = []
+    for (let row = 0; row < tableArr.length; row++) {
+        sum = 0
+        for (let col = 0; col < tableArr[row].length; col++) {
+            sum += tableArr[row][col]
+        }
+        arrOfSum.push(sum)
+        document.write(`Array = ${tableArr}<br>
+        Sum shop #${row + 1} = ${sum}$<br>`)
+    }
+    document.write(` array of sum = ${arrOfSum}`)
+</script>
+
+</html>

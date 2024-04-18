@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 2.9.</title>
+</head>
+
+<h1>Task #2.9.</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 2. Дано інформацію про прибуток К магазинів протягом тижня. Знайти :<br>
+    2.9. упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при порівнянні двох рядків треба знайти
+    суму кожного з рядків і порівнювати ці суми, на основі цих сум буде зрозуміло, який з елементів повинен іти раніше).
+
+</p>
+
+<script>
+    function getRandomNum(minNum, maxNum) {
+        return minNum + Math.floor(Math.random() * (maxNum - minNum + 1))
+    }
+
+    function getRandomRowArr(length, minNum, maxNum) {
+        let arr = []
+        for (let i = 0; i < length; i++) {
+            let randomNum = getRandomNum(minNum, maxNum)
+            arr.push(randomNum)
+        }
+        return arr
+    }
+
+    function getRandomTable(rows, columns, minNum, maxNum) {
+        for (let i = 0; i < rows; i++) {
+            let randomRowArr = getRandomRowArr(columns, minNum, maxNum)
+            tableArr.push(randomRowArr)
+        }
+        return tableArr
+    }
+
+    let tableArr = []
+    const qnttyOfShops = parseInt(prompt('How many shops?'))
+    const createTable = getRandomTable(qnttyOfShops, 7, 1, 10)
+    document.write(`Originate array<br>`)
+    tableArr.forEach(el => document.write(`${el}<br>`))
+    document.write(`Sorted array<br>`)
+
+    const sortedArr = tableArr.sort((arr1, arr2) => {
+        let sumArr1 = arr1.reduce((prevRes, el) => prevRes += el)
+        let sumArr2 = arr2.reduce((prevRes, el) => prevRes += el)
+        if (sumArr1 > sumArr2) return 1
+        if (sumArr1 < sumArr2) return -1
+        else 0
+    }
+    )
+    sortedArr.forEach(el => document.write(`${el}<br>`))
+</script>
+
+</html>
