@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 6</title>
+</head>
+
+<h1>Task #6</h1>
+<h4><a href="../index.html">Back</a></h4>
+
+<p>
+    Задача 6. Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я
+    довжиною 5 символів і під яким індексом.
+</p>
+
+<script>
+    let names = [
+        'John',
+        'Paul',
+        'Olga',
+        'Andrew',
+        'Abrams',
+        'Abba',
+        'Pet',
+        'Tina',
+        'Olga',
+        'Jack',
+        'Peter',
+    ]
+
+    const sortedNames = [...names]
+    sortedNames.sort((el1, el2) => el1.length - el2.length)
+    document.write(`Origin: ${names}.<br> Sorted: ${sortedNames}<br>`)
+
+    function binarySearch(arr, length) {
+        let start = 0
+        let end = arr.length - 1
+        while (start <= end) {
+            const middle = Math.floor((start + end) / 2)
+            if (arr[middle].length === length) return middle
+            if (arr[middle].length < length) start = middle + 1
+            if (arr[middle].length > length) end = middle - 1
+        }
+        return -1
+    }
+
+    const findWord = binarySearch(sortedNames, 5)
+    console.log(sortedNames)
+    console.log(findWord)
+    if (findWord !== -1) alert(`Name more than 5 letter - index: ${findWord}`)
+    else alert('Is not included')
+
+</script>
+
+</html>

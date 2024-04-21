@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 5</title>
+</head>
+
+<h1>Task #5</h1>
+<h4><a href="../index.html">Back</a></h4>
+
+<p>
+    Задача 5. Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я
+    «Olga» і під яким індексом.
+</p>
+
+<script>
+    let names = [
+        'John',
+        'Paul',
+        'Olga',
+        'Andrew',
+        'Abrams',
+        'Abba',
+        'Peter',
+        'Tina',
+        'Olga',
+        'Jack',
+        'Peter',
+    ]
+
+    const sortedNames = [...names]
+    sortedNames.sort()
+    document.write(`Origin: ${names}.<br> Sorted: ${sortedNames}<br>`)
+
+    function binarySearch(arr, searchElement) {
+        let start = 0
+        let end = arr.length - 1
+        while (start <= end) {
+            const middle = Math.floor((start + end) / 2)
+            if (arr[middle] === searchElement) return middle
+            if (arr[middle] < searchElement) start = middle + 1
+            if (arr[middle] > searchElement) end = middle - 1
+        }
+        return -1
+    }
+
+    const searchIndex = binarySearch(sortedNames, 'Olga')
+    if (searchIndex !== -1) alert(`Olga includes an array under the number: ${searchIndex}`)
+    else alert('Olga is not included')
+</script>
+
+</html>

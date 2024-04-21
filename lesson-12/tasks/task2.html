@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 2</title>
+</head>
+
+<h1>Task #2</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 2. Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів та порівнянь чисел під час
+    сортування змішуванням.
+</p>
+
+<script>
+    function getRandomNumberArr(minNum, maxNum, length) {
+        let arr = []
+        for (let i = 0; i < length; i++) {
+            let randomNumber = minNum + Math.floor(Math.random() * (maxNum - minNum + 1))
+            arr.push(randomNumber)
+        }
+        return arr
+    }
+    randomNumberArr = getRandomNumberArr(1, 1000, 30)
+    console.log(randomNumberArr)
+
+    let changed
+    let countCompare = 0
+    let countChanging = 0
+
+    let leftIndex = 0
+    let rightIndex = randomNumberArr.length - 1
+
+    while (leftIndex < rightIndex) {
+        changed = false
+        for (let i = leftIndex + 1; i <= rightIndex; i++) {
+            countCompare++
+            if (randomNumberArr[i - 1] > randomNumberArr[i]) {
+                let temp = randomNumberArr[i - 1]
+                randomNumberArr[i - 1] = randomNumberArr[i]
+                randomNumberArr[i] = temp
+                changed = true
+                countChanging++
+            }
+        }
+        rightIndex--
+        if (changed === false) break
+        changed = false
+        for (let i = rightIndex; i > leftIndex; i--) {
+            countCompare++
+            if (randomNumberArr[i - 1] > randomNumberArr[i]) {
+                let temp = randomNumberArr[i - 1]
+                randomNumberArr[i - 1] = randomNumberArr[i]
+                randomNumberArr[i] = temp
+                changed = true
+                countChanging++
+            }
+        }
+        leftIndex++
+        if (changed === false) break
+    }
+
+    document.write(`${randomNumberArr}<br>`)
+    document.write(`Count compare = ${countCompare}<br> Count changing = ${countChanging}`)
+</script>
+
+</html>
