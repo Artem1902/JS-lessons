@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 2</title>
+</head>
+
+<h1>Task #2</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 2. Розробити функцію, у яку передають об’єкт (день, місяць, рік). Визначити, який буде рік через N місяців.
+</p>
+
+<script>
+    function getYear({ day, month, year }, monthsCount) {
+        return Math.floor((year * 12 + month + monthsCount) / 12)
+    }
+
+    let dateObj = {
+        day: 15,
+        month: 3,
+        year: 2024,
+    }
+
+    let monthsCount = 9
+    let res = getYear(dateObj, monthsCount)
+    document.write(`Current date: ${dateObj.day}.${dateObj.month}.${dateObj.year}<br> after ${monthsCount} months will be ${res} year.<br>`)
+
+</script>
+
+</html>

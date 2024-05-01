@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 1</title>
+</head>
+
+<h1>Task #1</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 1. Описати масив об’єктів – сайтів розроблених компанією з такими властивостями
+</p>
+
+<script>
+    let websitesArr = [
+        {
+            title: 'IBM',
+            owner: 'Jonson',
+            sponsors: [
+                {
+                    lastName: 'Petrenko',
+                    firstName: 'Petro',
+                    donation: 150000,
+                },
+                {
+                    lastName: 'Ivanenko',
+                    firstName: 'Ivan',
+                    donation: 20000,
+                },
+                {
+                    lastName: 'Kravchenko',
+                    firstName: 'Oleg',
+                    donation: 3000,
+                }
+            ],
+            year: 2023,
+            price: 9000,
+        },
+        {
+            title: 'Intel',
+            owner: 'Smith',
+            sponsors: [
+                {
+                    lastName: 'Ivanov',
+                    firstName: 'Ivan',
+                    donation: 1000,
+                },
+                {
+                    lastName: 'Sidorov',
+                    firstName: 'Sergiy',
+                    donation: 500000,
+                },
+                {
+                    lastName: 'Bondarenko',
+                    firstName: 'Maksim',
+                    donation: 300000,
+                }
+            ],
+            year: 2005,
+            price: 50000,
+        },
+        {
+            title: 'Mediatek',
+            owner: 'Martin',
+            sponsors: [
+                {
+                    lastName: 'Moroz',
+                    firstName: 'Alex',
+                    donation: 500000,
+                },
+                {
+                    lastName: 'Stefanko',
+                    firstName: 'Taras',
+                    donation: 50000,
+                },
+                {
+                    lastName: 'Honcharenko',
+                    firstName: 'Oleksiy',
+                    donation: 30000,
+                }
+            ],
+            year: 2003,
+            price: 20000,
+        }
+    ]
+
+    // 1) загальну вартість усіх сайтів
+
+    document.write(`1) загальну вартість усіх сайтів<br>`)
+
+    let totalSum = websitesArr.reduce(
+        (prevSum, website) => prevSum + website.price,
+        0)
+
+    document.write(`Total sum = ${totalSum}<br>`)
+
+    // 2) кількість сайтів, що було зроблено між 2000 та 2009 рр.
+
+    document.write(`2) кількість сайтів, що було зроблено між 2000 та 2009 рр.<br>`)
+
+    let websitesCount = websitesArr.filter(web => web.year > 2000 && web.year <= 2009).length
+
+    document.write(`Sites between 2000 and 2009 - ${websitesCount}<br>`)
+
+    // 3) кількість сайтів, де сума спонсорських вкладень була більшою за 100000
+
+    document.write(`3) кількість сайтів, де сума спонсорських вкладень була більшою за 100000<br>`)
+
+    let moreThan100k = websitesArr.filter(web => {
+        return web.sponsors.reduce(
+            (prevSum, el) => prevSum + el.donation, 0
+        ) > 100000
+    }
+    ).length
+    document.write(`More than 100k donations: ${moreThan100k}<br>`)
+
+    // 4) створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив)
+
+
+    document.write(`4) створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив)<br>`)
+
+    let sponsorsArr = []
+    for (const web of websitesArr) {
+        sponsorsArr.push(web.sponsors)
+    }
+
+    document.write(`Sponsors list:<br>`)
+    sponsorsArr.forEach(
+        (objArr) => {
+            objArr.forEach(
+                obj => {
+                    for (const prop in obj) {
+                        document.write(`${prop} - ${obj[prop]}<br>`)
+                    }
+
+                }
+            )
+        }
+    )
+
+    let sponsorsNameArr = []
+    for (let i = 0; i < websitesArr.length; i++) {
+        for (let j = 0; j < websitesArr[i].sponsors.length; j++) {
+            sponsorsNameArr.push(websitesArr[i].sponsors[j].lastName)
+        }
+    }
+    document.write(`Sponsors Last Names: ${sponsorsNameArr}<br>  `)
+
+    // 5) знайти рік, коли прибуток був найбільшим
+
+    document.write(`5) знайти рік, коли прибуток був найбільшим<br>`)
+
+    let maxIncome = -Infinity
+    let biggestIncomeYear = 0
+    for (let i = 0; i < websitesArr.length; i++) {
+        if (websitesArr[i].price > maxIncome) {
+            maxIncome = websitesArr[i].price
+            biggestIncomeYear = websitesArr[i].year
+        }
+    }
+    document.write(`Biggest income: ${maxIncome} - year: ${biggestIncomeYear}<br>`)
+
+
+    // 6) упорядкувати список за спаданням прибутку
+
+    document.write(`6) упорядкувати список за спаданням прибутку<br>`)
+
+    let sorted = websitesArr.sort((web1, web2) => web2.price - web1.price)
+    document.write(`Sorted list:<br>`)
+    sorted.forEach((objArr) => {
+        document.write(`Title: ${objArr.title}, price: ${objArr.price}<br>`)
+    }
+    )
+
+    // 7) Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000
+
+    document.write(`7) Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000<br>`)
+
+    let priceMore10k = []
+    let priceLess10k = []
+
+    for (let i = 0; i < websitesArr.length; i++) {
+        if (websitesArr[i].price > 10000) priceMore10k.push(JSON.parse(JSON.stringify(websitesArr[i])))
+        else priceLess10k.push(JSON.parse(JSON.stringify(websitesArr[i])))
+    }
+
+    // priceMore10k = JSON.parse(JSON.stringify(websitesArr.filter(web => web.price > 10000)))
+    // priceLess10k = JSON.parse(JSON.stringify(websitesArr.filter(web => web.price < 10000)))
+    console.log('Price more than 10k')
+    console.log(priceMore10k)
+    console.log('Price less than 10k')
+    console.log(priceLess10k)
+</script>
+
+</html>
