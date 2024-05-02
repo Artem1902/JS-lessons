@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 2</title>
+</head>
+
+<h1>Task #2</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 2. Створити об’єкт «Авто».
+</p>
+
+<script>
+    const auto = {
+        carBrand: 'Mazda',
+        fuelTank: 60,
+        remainLitres: 20,
+        sitsAmount: 5,
+        passengersAmount: 2,
+        fillTankLitres: function (litres) {
+            this.remainLitres = this.remainLitres + litres
+        },
+        displayPassengers: function () {
+            return `Passengers in the car: ${this.passengersAmount}`
+        },
+        addPassenger: function (passengers = 1) {
+            this.passengersAmount = this.passengersAmount + passengers
+        },
+        removePassenger: function (passengers = 1) {
+            this.passengersAmount = this.passengersAmount - passengers
+        },
+    }
+
+
+
+
+</script>
+
+</html>

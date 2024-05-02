@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 4</title>
+</head>
+
+<h1>Task #4</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 4. Розробити клас Baner
+</p>
+
+<script>
+    class Banner {
+        constructor(arr) {
+            this.banners = arr
+        }
+        randomChoice() {
+            let randomBanner = Math.floor(Math.random() * this.banners.length)
+            return randomBanner
+        }
+        displayBanner() {
+            let bannerNum = this.randomChoice()
+            document.write(`
+            <a href="${this.banners[bannerNum].url}" target='_blank'>
+                <img src="${this.banners[bannerNum].img}">
+            </a>
+            `)
+        }
+    }
+
+    const bannerArr = [
+        {
+            img: 'https://picsum.photos/id/238/200/300',
+            url: 'https://www.google.com/'
+        },
+        {
+            img: 'https://picsum.photos/id/239/200/300',
+            url: 'https://www.ukr.net'
+        }, {
+            img: 'https://picsum.photos/id/237/200/300',
+            url: 'https://www.sport.ua'
+        },
+    ]
+
+    const firstBanner = new Banner(bannerArr)
+    firstBanner.displayBanner()
+
+</script>
+
+</html>

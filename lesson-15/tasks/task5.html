@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 5</title>
+</head>
+
+<h1>Task #5</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 5. Розробити клас «Керівник танців»
+</p>
+
+<script>
+    class DanceManager {
+        constructor(girlsNameArr, boysNameArr) {
+            this.girlsNameArr = girlsNameArr,
+                this.boysNameArr = boysNameArr
+        }
+        // randomBoyName() {
+        //     let nameNum = Math.floor(Math.random() * this.boysNameArr.length)
+        //     return this.boysNameArr[nameNum]
+        // }
+        // randomGirlName() {
+        //     let nameNum = Math.floor(Math.random() * this.girlsNameArr.length)
+        //     return this.girlsNameArr[nameNum]
+        // }
+        randomName(arr) {
+            let nameNum = Math.floor(Math.random() * arr.length)
+            return arr[nameNum]
+        }
+        displayCouple() {
+            let girlName = this.randomName(this.girlsNameArr)
+            let boyName = this.randomName(this.boysNameArr)
+            document.write(`Couple are: ${girlName} and ${boyName}<br>`)
+        }
+        run() {
+            let count = 0
+
+            let timeoutID = setInterval(() => {
+                this.displayCouple()
+                count++
+                if (count === 5) {
+                    clearInterval(timeoutID)
+                    document.write('The dance is over')
+                }
+            }, 5000);
+        }
+    }
+
+    const boysNameArr = ['Petro', 'Ivan', 'Semen']
+    const girlsNameArr = ['Anna', 'Ilona', 'Marina']
+
+    const firstCouple = new DanceManager(girlsNameArr, boysNameArr)
+    firstCouple.displayCouple()
+    firstCouple.run()
+</script>
+
+</html>

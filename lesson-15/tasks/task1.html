@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 1</title>
+</head>
+
+<h1>Task #1</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 1. Створити об’єкт «Тир». У масиві зберігаються 1, якщо у цьому квадраті є заєць і 0 в іншому випадку.
+</p>
+
+<script>
+    const shootingRange = {
+        battelfield: [0, 1, 1, 0, 0, 1, 0],
+        rabbit: 3,
+        shots: 5,
+        shoot: function () {
+            let shot = parseInt(prompt(`Choose the target from 1 to ${this.battelfield.length}`))
+            if (this.rabbit > 0 && this.shots > 0) {
+                this.shots--
+                if (this.battelfield[shot - 1] === 1) {
+                    alert('Boom!')
+                    this.battelfield[shot - 1] = 0
+                    this.rabbit--
+                } else alert('You miss!')
+            }
+            if (this.rabbit === 0) {
+                alert('You win!')
+            }
+            else if (this.shots === 0) {
+                alert('You lose!')
+            }
+            else shootingRange.shoot()
+        },
+        display: function () {
+            alert(`Targets: ${this.battelfield.length}, rabbits: 3, shots: ${this.shots}`)
+            for (let i = 0; i < this.battelfield.length; i++) {
+                if (this.battelfield[i] === 1) document.write(`Target # ${i + 1} - rabbit<br>`)
+                else document.write(`Target # ${i + 1} - ?<br>`)
+            }
+        },
+    }
+
+    shootingRange.display()
+    let start = confirm('Do you want to start?')
+    if (start) shootingRange.shoot()
+</script>
+
+</html>
