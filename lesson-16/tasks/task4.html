@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 4</title>
+</head>
+
+<h1>Task #4</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 4. Створити клас TBankomat, який моделює роботу банкомата. Клас повинен містити поля для зберігання кількості
+    купюр кожного із номіналів від 5 до 200 гривень. Реалізувати методи знаходження максимальної та мінімальної сум, які
+    може видати банкомат, та метод зняття деякої суми.
+</p>
+
+<script>
+
+    class Note {
+        #noteValue
+        #noteNumber
+        constructor(noteValue, noteNumber) {
+            this.NoteValue = noteValue
+            this.NoteNumber = noteNumber
+        }
+        get NoteValue() {
+            return this.#noteValue
+        }
+        set NoteValue(value) {
+            if (value === 200 || value === 100 || value === 50 || value === 20 || value === 10 || value === 5) this.#noteValue = value
+            else throw new Error('Не вірний номінал банкноти')
+        }
+
+        get NoteNumber() {
+            return this.#noteNumber
+        }
+        set NoteNumber(value) {
+            if (value >= 0) this.#noteNumber = value
+            else throw new Error('Кількість банкнот не може бути від"ємною')
+        }
+
+        get totalValue() {
+            return this.NoteValue * this.NoteNumber
+        }
+
+        toString() {
+            return `"${this.NoteValue}" : ${this.NoteNumber}`
+        }
+    }
+
+    class TBankomat {
+        #notesList
+        constructor(notesList) {
+            this.NotesList = notesList
+        }
+        get NotesList() {
+            return this.#notesList
+        }
+        set NotesList(value) {
+            if (value.length > 0) this.#notesList = value
+            else throw new Error('Масив з грошима порожній')
+        }
+
+        get minSum() {
+            let min = this.NotesList.reduce((prevMin, el) => el.NoteNumber > 0 && el.NoteValue < prevMin ? el.NoteValue : prevMin, Infinity
+            )
+            return isFinite(min) ? min : 0
+        }
+
+        get maxSum() {
+            return this.NotesList.reduce((prevSum, el) => el.totalValue + prevSum, 0)
+        }
+
+        getPossibleNotesList(userMoney) {
+            let possibleNotesList = []
+            for (let i = 0; i < this.NotesList.length && userMoney > 0; i++) {
+                let noteObj = this.NotesList[i]
+                if (userMoney >= noteObj.NoteValue && noteObj.NoteNumber > 0) {
+                    let notesNum = Math.floor(userMoney / noteObj.NoteValue)
+                    let notesToGive = Math.min(notesNum, noteObj.NoteNumber)
+                    possibleNotesList.push({ noteObj, notesToGive })
+                    userMoney -= noteObj.NoteValue * notesToGive
+                }
+            }
+            if (userMoney > 0) return false
+            return possibleNotesList
+        }
+
+        withdrawMoney(userMoney) {
+            if (userMoney > this.maxSum) {
+                document.write('В банкоматі немає достатньо грошей')
+                return
+            }
+            let possibleNotes = this.getPossibleNotesList(userMoney)
+            if (possibleNotes) {
+                for (const { noteObj, notesToGive } of possibleNotes) {
+                    document.write(`${noteObj.NoteValue} - ${notesToGive}<br>`)
+                    noteObj.NoteNumber -= notesToGive
+                } document.write('Заберіть Ваші гроші!')
+            } else {
+                document.write('Не можна видати таку суму бо немає таких купюр ')
+            }
+        }
+    }
+
+    let notesList = [
+        new Note(200, 5),
+        new Note(100, 10),
+        new Note(50, 20),
+        new Note(20, 15),
+        new Note(10, 30),
+        new Note(5, 0),
+    ]
+
+    let bank1 = new TBankomat(notesList)
+    bank1.withdrawMoney(690)
+    console.log(bank1.minSum)
+    console.log(bank1.maxSum)
+    console.log(notesList)
+
+</script>
+
+</html>

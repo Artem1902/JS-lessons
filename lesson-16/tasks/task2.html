@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 2</title>
+</head>
+
+<h1>Task #2</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 2. Створити клас TMoney для роботи з грошовими сумами. Сума повинна зберігатися у вигляді доларового
+    еквіваленту. Реалізувати методи додавання/вилучення грошової маси, вказуючи необхідну суму у гривнях, та визначення
+    курсу долара, при якому сума у гривнях збільшиться на 100. Курс долара зберігати в окремому полі.
+</p>
+
+<script>
+    class TMoney {
+        #money
+        #currency
+        constructor(money, currency) {
+            this.Currency = currency
+            this.Money = money / this.Currency
+        }
+        get Currency() {
+            return this.#currency
+        }
+        set Currency(value) {
+            if (value < 0) throw new Error('Курс валют не може бути від"ємним')
+            else this.#currency = value
+        }
+
+        get Money() {
+            return this.#money
+        }
+        set Money(value) {
+            if (value < 0) throw new Error('Кількість грошей не може бути від"ємною')
+            else {
+                this.#money = value
+            }
+        }
+
+        addMoney(value) {
+            let moneyInUSD = value / this.Currency
+            if (moneyInUSD < 0) throw new Error('Кількість грошей не може бути від"ємною')
+            else {
+                this.Money += moneyInUSD
+            }
+        }
+        withdrawMoney(value) {
+            let moneyInUSD = value / this.Currency
+            if (moneyInUSD < 0) throw new Error('Кількість грошей не може бути від"ємною')
+            else if (this.Money < moneyInUSD) throw new Error('Не достатньо грошей на рахунку')
+            else {
+                this.Money -= moneyInUSD
+            }
+        }
+        getCurrencyIncrBy100() {
+            return (this.Money * this.Currency + 100) / this.Money
+
+        }
+
+        toString() {
+            return `Money = ${this.Money}$`
+        }
+
+    }
+
+    const m1 = new TMoney(10000, 40)
+    // m1.addMoney(2000)
+    // m1.withdrawMoney(500)
+    let changedCurrency = m1.getCurrencyIncrBy100()
+    document.write(m1)
+    document.write(`<br>Current currency - ${m1.Currency}<br>`)
+    document.write(`Increase to 100 HRN - currency must be ${m1.getCurrencyIncrBy100()}`)
+
+</script>
+
+</html>
