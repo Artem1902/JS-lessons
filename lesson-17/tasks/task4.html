@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 4</title>
+</head>
+
+<h1>Task #4</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Склад. База товарів, які зберігаються на складі: назва товару, одиниця виміру, кількість, фірма виробник (назва,
+    реєстраційний номер). Організувати реєстрацію/відвантаження товарів, фільтрація за назвою товару, фільтрація за
+    назвою фірми
+</p>
+
+<script>
+    class Company {
+        constructor({ nameCompany, regNumber }) {
+            this.nameCompany = nameCompany
+            this.regNumber = regNumber
+        }
+        toString() {
+            return `${this.nameCompany} - #${this.regNumber}`
+        }
+    }
+
+    class Product {
+        constructor(initData) {
+            this.title = initData.title
+            this.measurement = initData.measurement
+            this.quantity = initData.quantity
+            this.company = new Company(initData)
+        }
+        toString() {
+            return `${this.title} - ${this.quantity} ${this.measurement}`
+        }
+    }
+
+    class Baza {
+        constructor(productList) {
+            this.productList = productList
+        }
+        addNewProduct(newProduct) {
+            let productToAdd = new Product(newProduct)
+            let searchTitle = productToAdd.title.toLowerCase()
+
+            for (let i = 0; i < this.productList.length; i++) {
+                let product = this.productList[i]
+                if (product.title.toLowerCase() === searchTitle) {
+                    document.write(`${product.title} вже є на складі, наявно ${product.quantity} ${product.measurement}. Додано ${productToAdd.quantity} ${productToAdd.measurement}.<br>`)
+                    product.quantity += productToAdd.quantity
+                    document.write(`Поточне значення: ${product.title} - ${product.quantity} ${product.measurement}.<br>`)
+                    break
+                } else {
+                    this.productList.push(productToAdd)
+                    document.write(`${productToAdd.title} - ${productToAdd.quantity} ${productToAdd.measurement} додано до бази товарів <br>`)
+                    break
+                }
+            }
+        }
+        shippedProduct(title, quantityToShip) {
+            let searchTitle = title.toLowerCase()
+            for (let i = 0; i < this.productList.length; i++) {
+                let product = this.productList[i]
+                if (product.title.toLowerCase() === searchTitle) {
+                    if (product.quantity > quantityToShip) {
+                        product.quantity -= quantityToShip
+                        document.write(`Відвантажено: ${product.title} - ${quantityToShip} ${product.measurement}. Залишок: ${product.quantity} ${product.measurement}.<br> `)
+                    } else document.write(`Не можливо відвантажити: ${product.title} - ${quantityToShip} ${product.measurement}. Оскільки залишок: ${product.quantity} ${product.measurement}.<br> `)
+                }
+            }
+        }
+        filterByTitlle(title) {
+            let searchTitle = title.toLowerCase()
+            return this.productList.filter(el => el.title.toLowerCase().includes(searchTitle))
+        }
+
+        filterByCompanyName(nameCompany) {
+            let searchNameCompany = nameCompany.toLowerCase()
+            return this.productList.filter(el => el.company.nameCompany.toLowerCase().includes(searchNameCompany))
+        }
+    }
+
+    let productList = [
+        new Product({
+            title: 'Banana',
+            measurement: 'kg',
+            quantity: 20,
+            nameCompany: 'Taskana',
+            regNumber: 123,
+        }
+        ),
+        new Product({
+            title: 'Orange',
+            measurement: 'kg',
+            quantity: 10,
+            nameCompany: 'Multi',
+            regNumber: 789,
+        }
+        ),
+        new Product({
+            title: 'Apple',
+            measurement: 'kg',
+            quantity: 5,
+            nameCompany: 'Microsoft',
+            regNumber: 555,
+        }
+        ),
+    ]
+
+    let pr1 = new Baza(productList)
+    document.write(`${pr1.productList[0]}<br>`)
+    document.write(`${pr1.productList[0].company}<br>`)
+
+    pr1.addNewProduct({
+        title: 'Mango',
+        measurement: 'kg',
+        quantity: 17,
+        nameCompany: 'Trinidad',
+        regNumber: 736,
+    })
+    pr1.addNewProduct({
+        title: 'baNana',
+        measurement: 'kg',
+        quantity: 14,
+        nameCompany: 'Taskana',
+        regNumber: 123,
+    })
+    pr1.shippedProduct('nuts', 72)
+    pr1.shippedProduct('orange', 7)
+    pr1.shippedProduct('mango', 77)
+
+    let findTitle = pr1.filterByTitlle('ora')
+    document.write(`Шукаємо за назвою продукта 'ora'- знайдено: ${findTitle}<br>`)
+
+    let findCompany = pr1.filterByCompanyName('tri')
+
+    findCompany.forEach(el => document.write(`Шукаємо за назвою компанії 'tri'- знайдено: ${el.company.nameCompany}.<br>`))
+
+</script>
+
+</html>

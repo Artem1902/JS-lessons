@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 2</title>
+</head>
+
+<h1>Task #2</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Створити службове авто (водій, марка, номер). Створити клас таким чином, щоб можна було створити тільки один
+    екземпляр цього класу.
+</p>
+
+<script>
+    class Auto {
+        static autoRef
+        constructor(name, model, number) {
+            if (Auto.autoRef) return Auto.autoRef
+
+            this.name = name
+            this.model = model
+            this.number = number
+
+            Auto.autoRef = this
+        }
+        toString() {
+            return `Name - ${this.name}, model - ${this.model}, number - ${this.number}`
+        }
+    }
+
+    let auto1 = new Auto('Ivan', 'Volvo', 'AA1122CC')
+    let auto2 = new Auto('Petro', 'BMW', 'AA2222CC')
+    document.write(`${auto1}<br>`)
+    document.write(auto2)
+</script>
+
+</html>

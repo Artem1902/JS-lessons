@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 3</title>
+</head>
+
+<h1>Task #3</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Створити клас Нагадувач. Кожні вказані кількості секунд (використати setInterval) програма нагадує про якусь подію
+    (це просто текст) і також виводиться порядковий номер скільки раз вже нагадування було. Зробити так, щоб неможна
+    було зробити одночасно декілька об’єктів-нагадувачів. Методи зупинки таймера, метод зміни повідомлення без зупинки
+    таймера.
+</p>
+
+<script>
+    class Reminder {
+        static reminderRef
+        static count = 0
+        static timeoutID
+        constructor(time, text) {
+            if (Reminder.reminderRef) return Reminder.reminderRef
+
+            this.time = time
+            this.text = text
+
+            Reminder.reminderRef = this
+        }
+        toString() {
+            return `${this.text} - ${Reminder.count}<br>`
+        }
+
+        start() {
+            Reminder.timeoutID = setInterval(() => {
+                Reminder.count++
+                document.write(`${this.text} - ${Reminder.count} time(s)<br>`)
+            }, this.time);
+        }
+        finish() {
+            clearInterval(Reminder.timeoutID)
+        }
+
+        changeText(newText) {
+            this.text = newText
+        }
+    }
+
+    let rem1 = new Reminder(2000, 'Hello')
+    let rem2 = new Reminder(200, 'Bye')
+    document.write(rem1)
+    document.write(rem2)
+    rem1.start()
+    setTimeout(() => {
+        rem1.changeText('World')
+    }, 10000);
+    setTimeout(() => {
+        rem1.finish()
+    }, 20000);
+    // rem1.finish()
+
+
+</script>
+
+</html>

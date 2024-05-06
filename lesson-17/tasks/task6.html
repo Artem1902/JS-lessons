@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 6</title>
+</head>
+
+<h1>Task #6</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Дано два класи MultChecker (клас для перевірки таблиці множення - рандомно генеруються числа, які треба
+    перемножати), AddChecker (клас для перевірки додавання - рандомно генеруються числа у заданому діапазоні, які треба
+    додавати). Обидва класи надсилають результати тестування об'єкту класу Hystory, який зберігає історію тестування у
+    масиві у вигляді об'єктів
+</p>
+
+<script>
+    class History {
+        constructor() {
+            this.resultArr = []
+        }
+        addToHistory(resultObj) {
+            this.resultArr.push(resultObj)
+        }
+        displayHistory() {
+            this.resultArr.forEach(el => {
+                document.write(`Task<br>`)
+                for (const key in el) {
+                    document.write(`${key} - ${el[key]}<br>`)
+                }
+                document.write(`<br>`)
+            }
+            )
+            let correctAnswers = this.resultArr.reduce((prevCor, el) => el.isCorrect === true ? prevCor + 1 : prevCor, 0)
+            document.write(`Correct answers: ${correctAnswers}<br>`)
+        }
+    }
+    class MultChecker {
+        constructor(firstNum, secondNum) {
+            this.firstNum = firstNum
+            this.secondNum = secondNum
+        }
+        doMult() {
+            let userAnswer = parseInt(prompt(`What is ${this.firstNum} * ${this.secondNum}?`))
+            let isCorrect
+            if (userAnswer === (this.firstNum * this.secondNum)) {
+                isCorrect = true
+            } else isCorrect = false
+            return {
+                firstNum: this.firstNum,
+                secondNum: this.secondNum,
+                operation: '*',
+                userAnswer: userAnswer,
+                correctAnswer: this.firstNum * this.secondNum,
+                isCorrect: isCorrect
+            }
+        }
+    }
+
+    class AddChecker {
+        constructor(firstNum, secondNum) {
+            this.firstNum = firstNum
+            this.secondNum = secondNum
+        }
+        doPlus() {
+            let userAnswer = parseInt(prompt(`What is ${this.firstNum} + ${this.secondNum}?`))
+            let isCorrect
+            if (userAnswer === (this.firstNum + this.secondNum)) {
+                isCorrect = true
+            } else isCorrect = false
+            return {
+                firstNum: this.firstNum,
+                secondNum: this.secondNum,
+                operation: '+',
+                userAnswer: userAnswer,
+                correctAnswer: this.firstNum + this.secondNum,
+                isCorrect: isCorrect
+            }
+        }
+    }
+
+    class TestManager {
+        static testManagerRef
+        constructor(tasksNum) {
+            if (TestManager.testManagerRef) return TestManager.testManagerRef
+
+            this.tasksNum = tasksNum
+            this.historyArr = new History()
+
+            TestManager.testManagerRef = this
+        }
+        randomNum() {
+            return 1 + Math.floor(Math.random() * 9)
+        }
+        start() {
+            for (let i = 0; i < tasksNum; i++) {
+
+                let chooseOperation = Math.floor(Math.random() * 2)
+
+                if (chooseOperation === 0) {
+                    let taskMul = new MultChecker(this.randomNum(), this.randomNum())
+                    let resMul = taskMul.doMult()
+                    this.historyArr.addToHistory(resMul)
+                } else {
+                    let taskPlus = new AddChecker(this.randomNum(), this.randomNum())
+                    let resPlus = taskPlus.doPlus()
+                    this.historyArr.addToHistory(resPlus)
+                }
+            }
+            this.historyArr.displayHistory()
+        }
+    }
+    const tasksNum = parseInt(prompt('How many tasks do you want?', 2))
+    const testing = new TestManager(tasksNum)
+    const testing2 = new TestManager(123)
+    testing.start()
+
+    console.log(testing)
+    console.log(testing2)
+</script>
+
+</html>

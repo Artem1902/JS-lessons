@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 5</title>
+</head>
+
+<h1>Task #5</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Особиста бібліотека. Картотека домашньої бібліотеки: дані книги (автори (піб, рік народження, короткий опис), назва
+    книги, жанр, видавництво (назва, реєстраційний номер, рік засування)). Реалізувати розділи бібліотеки (спеціальна
+    література, хобі, домашнє господарство і т.д.), походження книги і наявність на даний час. Організувати
+    додавання/вилучення книг та вибір книг за назвою, за ПІБ автора, за видавництвом.
+</p>
+
+<script>
+
+    class Author {
+        constructor({ authorName, yearOfBirth, description }) {
+            this.authorName = authorName
+            this.yearOfBirth = yearOfBirth
+            this.description = description
+        }
+        toString() {
+            return `Author: ${this.authorName}, date of birth: ${this.yearOfBirth} <br>`
+        }
+    }
+
+    class Publish {
+        constructor({ publishName, registerNum, yearOfFound }) {
+            this.publishName = publishName
+            this.registerNum = registerNum
+            this.yearOfFound = yearOfFound
+        }
+        toString() {
+            return `Publish: ${this.publishName} in ${this.yearOfFound}`
+        }
+    }
+
+    class Book {
+        constructor(initData) {
+            this.id = 1 + Math.floor(Math.random() * 1000)
+            this.available = true
+            this.author = new Author(initData)
+            this.publish = new Publish(initData)
+            this.title = initData.title
+            this.genre = initData.genre
+            this.origin = initData.origin
+        }
+        toString() {
+            return `${this.title} - ${this.genre} - ${this.origin} <br>`
+        }
+    }
+
+    class Library {
+        constructor() {
+            this.fictionDepartment = []
+            this.realismDepartment = []
+            this.fantasyDepartment = []
+            this.dramaDepartment = []
+            this.available = []
+            this.originOwn = []
+            this.originBorrow = []
+            this.allBooks = []
+        }
+        addBook(newBook) {
+            this.allBooks.push(newBook)
+            switch (newBook.genre) {
+                case 'Fiction': this.fictionDepartment.push(newBook)
+                    break;
+                case 'Realism': this.realismDepartment.push(newBook)
+                    break;
+                case 'Fantasy': this.fantasyDepartment.push(newBook)
+                    break;
+                case 'Drama': this.dramaDepartment.push(newBook)
+                    break;
+                default: throw new Error('Something wrong with genre')
+                    break;
+            }
+            if (newBook.available) this.available.push(newBook)
+            if (newBook.origin == 'own') this.originOwn.push(newBook)
+            else if (newBook.origin == 'borrow') this.originBorrow.push(newBook)
+            else throw new Error('Something wrong with origin')
+        }
+        removeBook(titleBook) {
+            let key = titleBook.toLowerCase()
+            let findBookForDelete = this.allBooks.find(el => el.title.toLowerCase().includes(key))
+
+            switch (findBookForDelete.genre) {
+                case 'Fiction': this.fictionDepartment = this.fictionDepartment.filter(el => el.id !== findBookForDelete.id)
+                    break;
+                case 'Realism': this.realismDepartment = this.realismDepartment = this.realismDepartment.filter(el => el.id !== findBookForDelete.id)
+                    break;
+                case 'Fantasy': this.fantasyDepartment = this.fantasyDepartment.filter(el => el.id !== findBookForDelete.id)
+                    break;
+                case 'Drama': this.dramaDepartment = this.dramaDepartment.filter(el => el.id !== findBookForDelete.id)
+                    break;
+                default: throw new Error('Something wrong with deleting genre')
+                    break;
+            }
+
+            this.available = this.available.filter(el => el.id !== findBookForDelete.id)
+
+            if (findBookForDelete.origin == 'own') this.originOwn = this.originOwn.filter(el => el.id !== findBookForDelete.id)
+            else if (findBookForDelete.origin == 'borrow') this.originOwn = this.originOwn.filter(el => el.id !== findBookForDelete.id)
+            else throw new Error('Something wrong with deleting origin')
+
+            this.allBooks = this.allBooks.filter(el => el.id !== findBookForDelete.id)
+        }
+    }
+
+    let booksArr = [
+        new Book({
+            authorName: "George Orwell",
+            yearOfBirth: 1903,
+            description: "British writer, author of the novel '1984' and 'Animal Farm'.",
+            title: "1984",
+            genre: "Fiction",
+            publishName: "Publisher A",
+            registerNum: "12345",
+            yearOfFound: 1950,
+            origin: 'own',
+        }),
+        new Book({
+            authorName: "Fyodor Dostoevsky",
+            yearOfBirth: 1821,
+            description: "Russian writer, author of the novels 'Crime and Punishment' and 'The Idiot'.",
+            title: "Crime and Punishment",
+            genre: "Realism",
+            publishName: "Publisher B",
+            registerNum: "23456",
+            yearOfFound: 1866,
+            origin: 'own',
+        }),
+        new Book({
+            authorName: "Jane Austen",
+            yearOfBirth: 1775,
+            description: "English writer, author of the novels 'Pride and Prejudice' and 'Emma'.",
+            title: "Pride and Prejudice",
+            genre: "Fiction",
+            publishName: "Publisher C",
+            registerNum: "34567",
+            yearOfFound: 1813,
+            origin: 'own',
+        }),
+        new Book({
+            authorName: "Leo Tolstoy",
+            yearOfBirth: 1828,
+            description: "Russian writer, author of the novels 'War and Peace' and 'Anna Karenina'.",
+            title: "War and Peace",
+            genre: "Fiction",
+            publishName: "Publisher A",
+            registerNum: "45678",
+            yearOfFound: 1869,
+            origin: 'borrow',
+        }),
+        new Book({
+            authorName: "Ernest Hemingway",
+            yearOfBirth: 1899,
+            description: "American writer, author of the novels 'The Old Man and the Sea' and 'A Farewell to Arms'.",
+            title: "The Old Man and the Sea",
+            genre: "Fiction",
+            publishName: "Publisher B",
+            registerNum: "56789",
+            yearOfFound: 1952,
+            origin: 'own',
+        }),
+        new Book({
+            authorName: "J.K. Rowling",
+            yearOfBirth: 1965,
+            description: "British writer, author of the 'Harry Potter' series.",
+            title: "Harry Potter and the Philosopher's Stone",
+            genre: "Fantasy",
+            publishName: "Publisher C",
+            registerNum: "67890",
+            yearOfFound: 1997,
+            origin: 'borrow',
+        }),
+        new Book({
+            authorName: "Margaret Atwood",
+            yearOfBirth: 1939,
+            description: "Canadian writer, author of the novel 'The Handmaid's Tale'.",
+            title: "The Handmaid's Tale",
+            genre: "Fiction",
+            publishName: "Publisher A",
+            registerNum: "78901",
+            yearOfFound: 1985,
+            origin: 'own',
+        }),
+        new Book({
+            authorName: "J.R.R. Tolkien",
+            yearOfBirth: 1892,
+            description: "British writer, author of the novel 'The Lord of the Rings'.",
+            title: "The Lord of the Rings",
+            genre: "Fantasy",
+            publishName: "Publisher B",
+            registerNum: "89012",
+            yearOfFound: 1954,
+            origin: 'borrow',
+        }),
+        new Book({
+            authorName: "Harper Lee",
+            yearOfBirth: 1926,
+            description: "American writer, author of the novel 'To Kill a Mockingbird'.",
+            title: "To Kill a Mockingbird",
+            genre: "Drama",
+            publishName: "Publisher C",
+            registerNum: "90123",
+            yearOfFound: 1960,
+            origin: 'own',
+        }),
+        new Book({
+            authorName: "Gabriel Garcia Marquez",
+            yearOfBirth: 1927,
+            description: "Colombian writer, author of the novel 'One Hundred Years of Solitude'.",
+            title: "One Hundred Years of Solitude",
+            genre: "Realism",
+            publishName: "Publisher A",
+            registerNum: "01234",
+            yearOfFound: 1967,
+            origin: 'borrow',
+        })
+    ]
+
+    const myLibrary = new Library()
+    for (let i = 0; i < booksArr.length; i++) {
+        myLibrary.addBook(booksArr[i])
+    }
+    document.write(`All Library<br>`)
+    document.write(myLibrary.allBooks)
+    document.write(`<br>fictionDepartment<br>`)
+    document.write(myLibrary.fictionDepartment)
+    document.write(`<br>My own books<br>`)
+    document.write(myLibrary.originOwn)
+
+    myLibrary.addBook(
+        new Book({
+            authorName: "Agatha Christie",
+            yearOfBirth: 1890,
+            description: "British writer, known for her detective novels and short story collections.",
+            title: "Murder on the Orient Express",
+            genre: "Fiction",
+            publishName: "Publisher B",
+            registerNum: "12345",
+            yearOfFound: 1934,
+            origin: 'own',
+        })
+    )
+
+    myLibrary.removeBook('crime')
+</script>
+
+</html>
