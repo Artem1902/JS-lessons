@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 4</title>
+</head>
+
+<h1>Task #4</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 4. Наперед задано у скрипті масив зі списком бажань. Після завантаження сторінки випадковим чином вибираються
+    3 і відображаються у окремих div (їх треба створити і додати на сторінку)
+</p>
+<div>
+
+</div>
+<script>
+
+    function getWishes(arr) {
+        for (let i = 0; i < 3; i++) {
+            const randomInd = Math.floor(Math.random() * arr.length)
+            let elDiv = document.createElement('div')
+            elDiv.innerText = arr[randomInd]
+            document.body.append(elDiv)
+        }
+    }
+
+    let wishlist = [
+        "Новий смартфон",
+        "Подорож до Японії",
+        "Книга 'Війна і мир'",
+        "Новий ноутбук",
+        "Квартира з видом на море",
+        "Курси малювання",
+        "Поїздка на сафарі",
+        "Навчання гри на гітарі",
+        "Камін",
+        "Час на відпочинок із сім'єю"
+    ];
+
+    window.onload = function () {
+        getWishes(wishlist)
+    }
+</script>
+
+</html>

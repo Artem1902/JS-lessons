@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 7</title>
+</head>
+
+<h1>Task #7</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 7. Подорож складається з 3 етапів. На кожному етапі користувач може вибрати один з видів транспорту (авто,
+    автобус, літак - випадаючий список), харчування (сніданок, обід, вечеря – checkbоx) та одного з 3-х
+    гідів(використати - radio buttons). Ціни визначте самі. Підрахувати загальну вартість.
+</p>
+<div>
+    <h2>Transport</h2>
+    <label>
+        Transport type:
+        <select id="selectTransport">
+            <option value="1000">Auto</option>
+            <option value="3000">Plane</option>
+            <option value="300">Bus</option>
+        </select>
+    </label>
+</div>
+<div>
+    <h2>Food</h2>
+    <label>
+        Breakfast
+        <input type="checkbox" value="50">
+    </label>
+    <label>
+        Lunch
+        <input type="checkbox" value="150">
+    </label>
+    <label>
+        Dinner
+        <input type="checkbox" value="100">
+    </label>
+</div>
+<br>
+<fieldset>
+    <legend>Select a guide:</legend>
+    <div>
+        <input type="radio" name="guide" value="200">
+        <label>Petro</label>
+    </div>
+    <div>
+        <input type="radio" name="guide" value="300">
+        <label>Stepan</label>
+    </div>
+    <div>
+        <input type="radio" name="guide" value="400">
+        <label>Mykola</label>
+    </div>
+</fieldset>
+<br>
+<button id="btn">Count total</button>
+<hr>
+<h2>Total - <span id="result"></span>$</h2>
+<script>
+
+    function getTotal() {
+        let sum = 0
+        const inputsCheck = document.querySelectorAll('input[type=checkbox]')
+        for (const inp of inputsCheck) {
+            if (inp.checked) sum += parseFloat(inp.value)
+        }
+        const inputsRadio = document.querySelectorAll('input[name=guide]')
+        for (const inp of inputsRadio) {
+            if (inp.checked) sum += parseFloat(inp.value)
+        }
+        let transportPrice = parseFloat(document.getElementById('selectTransport').value)
+        sum += transportPrice
+        document.getElementById('result').innerText = sum
+    }
+
+    window.onload = function () {
+        document.getElementById('btn').onclick = getTotal
+    }
+
+</script>
+
+</html>

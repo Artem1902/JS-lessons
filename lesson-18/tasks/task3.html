@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 3</title>
+</head>
+
+<h1>Task #3</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 3. Користувач задає рік народження. Визначити кількість років користувача.
+</p>
+<div>
+    <label>
+        <input type="number" id="yearInput" placeholder="Year of birth">
+    </label>
+    <br>
+    <button id="btn">Find out!</button>
+    <p>
+        You are: <span id="result"></span> years old.
+    </p>
+</div>
+<script>
+    function yearsOld() {
+        const currentYear = new Date().getFullYear()
+        const yearOfPerson = parseFloat(document.getElementById('yearInput').value)
+
+        const res = currentYear - yearOfPerson
+
+        document.getElementById('result').innerText = res
+    }
+
+    window.onload = function () {
+        document.getElementById('btn').onclick = yearsOld
+    }
+</script>
+
+</html>

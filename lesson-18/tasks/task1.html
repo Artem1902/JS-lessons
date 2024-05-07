@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 1</title>
+</head>
+
+<h1>Task #1</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 1. Розробити калькулятор
+</p>
+<div>
+    <label>
+        First number:
+        <input type="number" id="firstNum" placeholder="Type first number here" value="0">
+    </label>
+    <br>
+    <label>
+        Second number:
+        <input type="number" id="secondNum" placeholder="Type second number here" value="0">
+    </label>
+    <br>
+    <button id="addBtn">Додати</button>
+    <button id="minusBtn">Відняти</button>
+    <button id="multBtn">Помножити</button>
+    <button id="splitBtn">Поділити</button>
+    <hr>
+    <label>
+        Result:
+        <input type="number" id="result" placeholder="Result">
+    </label>
+</div>
+<script>
+    function addNum() {
+        const firstNum = parseFloat(document.getElementById('firstNum').value)
+        const secondNum = parseFloat(document.getElementById('secondNum').value)
+        const res = firstNum + secondNum
+        document.getElementById('result').value = res
+    }
+    function minusNum() {
+        const firstNum = parseFloat(document.getElementById('firstNum').value)
+        const secondNum = parseFloat(document.getElementById('secondNum').value)
+        const res = firstNum - secondNum
+        document.getElementById('result').value = res
+    }
+
+    function multNum() {
+        const firstNum = parseFloat(document.getElementById('firstNum').value)
+        const secondNum = parseFloat(document.getElementById('secondNum').value)
+        const res = firstNum * secondNum
+        document.getElementById('result').value = res
+    }
+
+    function splitNum() {
+        const firstNum = parseFloat(document.getElementById('firstNum').value)
+        const secondNum = parseFloat(document.getElementById('secondNum').value)
+        const res = firstNum / secondNum
+        document.getElementById('result').value = res
+    }
+
+    window.onload = function () {
+        document.getElementById('addBtn').onclick = addNum
+        document.getElementById('minusBtn').onclick = minusNum
+        document.getElementById('multBtn').onclick = multNum
+        document.getElementById('splitBtn').onclick = splitNum
+    }
+</script>
+
+</html>
