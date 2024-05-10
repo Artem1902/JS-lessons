@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 5</title>
+    <style>
+        .frame {
+            border: 2px solid green;
+        }
+
+        .products-page__body {
+            display: flex;
+            flex-wrap: wrap;
+            row-gap: 30px;
+            margin: 0 -13px;
+        }
+
+        .products-page__column {
+            padding: 0 13px;
+            flex: 0 0 33.333%;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+            row-gap: 16px;
+        }
+
+        .card__image {
+            width: 100%;
+            height: 100%;
+            aspect-ratio: 357/240;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .card__link-img {
+            overflow: hidden;
+        }
+
+        @media (any-hover: hover) {
+            .card__link-img:hover .card__image {
+                transform: scale(1.1);
+            }
+        }
+
+        .card__content {
+            flex-grow: 1;
+        }
+
+        .card__title {
+            color: #000;
+            font-family: 'DM Serif Text', sans-serif;
+            font-size: 24px;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .card__text {
+            color: #000;
+            line-height: 1.6;
+        }
+
+        .card__links {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card__link {
+            color: #f55529;
+            font-weight: 800;
+            line-height: 1.5;
+            transition: all 0.3s;
+        }
+
+        @media (any-hover: hover) {
+            .card__link:hover {
+                color: #d43b11;
+                text-decoration: underline;
+            }
+        }
+
+        .card__arrow {
+            background: url('../img/arrow.svg') no-repeat;
+            min-height: 24px;
+            min-width: 24px;
+            flex: 0 0 24px;
+        }
+
+        @media (max-width: 1480px) {
+            .products-page {
+                background: none;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .products-page__column {
+                flex: 0 0 50%;
+            }
+
+            .products-page__container {
+                padding: 60px 15px 50px 15px;
+            }
+
+            .products-page__top {
+                margin-bottom: 30px;
+            }
+
+            .products-page__title {
+                font-size: 38px;
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 479.98px) {
+            .products-page__column {
+                flex: 0 0 100%;
+            }
+
+            .products-page__title,
+            .products-page__sub-title {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<h1>Task #5</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 5. Відображаємо картки товарів, які користувач може вибирати. Вибраний товар має зелену рамку (при кліку
+    робити toogle з класом вибраного елемента)
+</p>
+
+<div class="products-page__body">
+    <div class="products-page__column">
+        <div class="products-page__card card">
+            <a href="#" class="card__link-img">
+                <img class="card__image" src="img/01.webp" alt="Image">
+            </a>
+            <div class="card__content">
+                <h3 class="card__title">Engagement Rings – a Buyer’s Guide</h3>
+                <div class="card__text">Video marketing is a powerful marketing strategy that allows you to portray an
+                    advertisement in the form of a story, which can</div>
+            </div>
+            <div class="card__links">
+                <a class="card__link" href="#">Read more</a>
+            </div>
+        </div>
+    </div>
+    <div class="products-page__column">
+        <div class="products-page__card card">
+            <a href="#" class="card__link-img">
+                <img class="card__image" src="img/02.webp" alt="Image">
+            </a>
+            <div class="card__content">
+                <h3 class="card__title">Engagement Rings – a Buyer’s Guide</h3>
+                <div class="card__text">Video marketing is a powerful marketing strategy that allows you to portray an
+                    advertisement in the form of a story, which can</div>
+            </div>
+            <div class="card__links">
+                <a class="card__link" href="#">Read more</a>
+            </div>
+        </div>
+    </div>
+    <div class="products-page__column">
+        <div class="products-page__card card">
+            <a href="#" class="card__link-img">
+                <img class="card__image" src="img/03.webp" alt="Image">
+            </a>
+            <div class="card__content">
+                <h3 class="card__title">Engagement Rings – a Buyer’s Guide</h3>
+                <div class="card__text">Video marketing is a powerful marketing strategy that allows you to portray an
+                    advertisement in the form of a story, which can</div>
+            </div>
+            <div class="card__links">
+                <a class="card__link" href="#">Read more</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function changeFrame(e) {
+        let cards = document.getElementsByClassName("products-page__column")
+        const clickedCard = e.target.closest(".products-page__column")
+        for (const card of cards) {
+            if (card === clickedCard) card.classList.toggle('frame')
+            else card.classList.remove('frame')
+        }
+    }
+
+    document.getElementsByClassName('products-page__body')[0].addEventListener('click', changeFrame)
+
+</script>
+
+</html>

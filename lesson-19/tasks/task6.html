@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 6</title>
+</head>
+
+<h1>Task #6</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 6. Дано список спортсменів. Потрібно сформувати список тих, які будуть брати участь у змаганні. При цьому є
+    два стовпці. В одному відображені всі спортсмени, в іншому – список тих, хто був вибраний. При натисканні на зелену
+    стрілку спортсмен переміщається у список для змагань. При натисканні на червону стрілку спортсмен переміщається у
+    загальний список.
+</p>
+<div id="initialDIV"></div>
+
+<script>
+
+    function createList(text, id) {
+        let container = document.createElement('DIV')
+        let inintialDiv = document.getElementById('initialDIV')
+        inintialDiv.append(container)
+
+        let title = document.createElement('H2')
+        title.innerText = text
+        container.append(title)
+
+        let listDiv = document.createElement('OL')
+        listDiv.setAttribute('id', id)
+        container.append(listDiv)
+    }
+
+    function addToCommonList(name) {
+        let commonList = document.getElementById('common')
+
+        let item = document.createElement('LI')
+
+        let itemName = document.createElement('SPAN')
+        itemName.innerText = name
+        item.append(itemName)
+        commonList.append(item)
+
+        let btn = document.createElement('BUTTON')
+        btn.innerText = 'Select'
+        item.append(btn)
+    }
+
+
+    function addToChoosenList(name) {
+        let choosenList = document.getElementById('choosen')
+
+        let item = document.createElement('LI')
+
+        let itemName = document.createElement('SPAN')
+        itemName.innerText = name
+        item.append(itemName)
+
+        choosenList.append(item)
+
+        let btn = document.createElement('BUTTON')
+        btn.innerText = 'Common'
+        item.append(btn)
+    }
+
+    function change(e) {
+        let element = e.target
+        if (element.tagName === 'BUTTON') {
+            if (element.innerText === 'Select') {
+                let name = element.previousElementSibling.innerText
+                addToChoosenList(name)
+                element.closest('LI').remove()
+            } else {
+                let name = element.previousElementSibling.innerText
+                addToCommonList(name)
+                element.closest('LI').remove()
+            }
+        }
+    }
+
+    let listNames = ['Aaa', 'Bbb', "Ccc", 'Ddd', "Eee", 'Fff']
+
+    window.onload = function () {
+        createList('Загальний список', "common")
+        createList(' Обрані для змагання', "choosen")
+        for (const item of listNames) {
+            addToCommonList(item)
+        }
+    }
+
+    let baselDiv = document.getElementById('initialDIV')
+    baselDiv.addEventListener('click', change)
+
+</script>
+
+</html>

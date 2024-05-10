@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 1</title>
+</head>
+
+<h1>Task #1</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 1. Дано 10 рядків тексту «Hello!» у окремих div. При кліку на якийсь із них усі наступні повинні бути
+    зафарбовані у червоний колір.
+</p>
+<div id="initialDIV"></div>
+
+<script>
+
+
+    function createDIV(text, number) {
+        for (let i = 0; i < number; i++) {
+            const elDiv = document.createElement('div')
+            elDiv.innerText = text
+            document.getElementById('initialDIV').append(elDiv)
+        }
+    }
+
+    function divClick(e) {
+        const clickedDiv = e.target
+        if (clickedDiv.tagName === 'DIV') {
+            let currentDiv = clickedDiv
+            while (currentDiv.nextElementSibling !== null) {
+                currentDiv = currentDiv.nextElementSibling
+                currentDiv.style.backgroundColor = 'red'
+            }
+        }
+    }
+
+    createDIV('Hello', 10)
+
+    const helloDivs = document.getElementById('initialDIV')
+    helloDivs.addEventListener('click', divClick)
+
+
+</script>
+
+</html>

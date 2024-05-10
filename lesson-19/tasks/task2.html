@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 2</title>
+</head>
+
+<h1>Task #2</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 2. Дано 5 елементів input. При введенні значення у якийсь із них необхідно автоматично заповнювати інші (усі
+    попередні у спадному порядку(кожен попередній має значення на 1 менше за наступний), усі наступні на 1 більше (кожен
+    наступне на 1 більше за попереднього)
+</p>
+<div id="initialDIV" style="display: flex; flex-direction: column;">
+    <label>
+        Value 1
+        <input type="number">
+    </label>
+    <label>
+        Value 2
+        <input type="number">
+    </label>
+    <label>
+        Value 3
+        <input type="number">
+    </label>
+    <label>
+        Value 4
+        <input type="number">
+    </label>
+    <label>
+        Value 5
+        <input type="number">
+    </label>
+</div>
+
+<script>
+    function changeNumbers(event) {
+        const changedInp = event.target
+        let number = parseFloat(changedInp.value)
+
+        let step = 1
+        let currentInp = changedInp
+
+        while (currentInp.parentElement.nextElementSibling !== null) {
+            currentInp = currentInp.parentElement.nextElementSibling.firstElementChild
+            currentInp.value = number + step
+            step++
+        }
+
+        let nextStep = 1
+        currentInp = changedInp
+
+        while (currentInp.parentElement.previousElementSibling !== null) {
+            currentInp = currentInp.parentElement.previousElementSibling.firstElementChild
+            currentInp.value = number - nextStep
+            nextStep++
+        }
+    }
+
+    const inputsList = document.getElementById('initialDIV')
+    inputsList.addEventListener('change', changeNumbers)
+
+
+</script>
+
+</html>

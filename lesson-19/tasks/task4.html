@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 4</title>
+    <style>
+        td {
+            border: 2px solid black;
+        }
+
+        table {
+            margin: 20px;
+        }
+    </style>
+</head>
+
+
+<h1>Task #4</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 4. Дано 3 таблиці розмірності 3*3 з випадковими числами. Якщо відбувається клік на якійсь із клітинок, то до
+    відповідної таблиці додається червона рамка (спробуйте додати можливість відображення кількості кліків біля назви
+    таблиці з використанням відповідно доданого для цього атрибута).
+</p>
+<div id="divId"></div>
+<script>
+
+    function createTables() {
+        for (let i = 0; i < 3; i++) {
+            let table = document.createElement('table')
+            table.setAttribute('myClick', 0)
+            let divEl = document.getElementById('divId')
+            divEl.append(table)
+
+            let title = document.createElement('h3')
+            title.innerText = `Table #${i + 1}. `
+            table.before(title)
+
+            let spanClicks = document.createElement('h4')
+            spanClicks.innerText = 'Total clicks: 0'
+            title.after(spanClicks)
+
+            for (let j = 0; j < 3; j++) {
+                let row = document.createElement('tr')
+                table.append(row)
+                for (let k = 0; k < 3; k++) {
+                    let cel = document.createElement('td')
+                    let randomNum = 1 + Math.floor(Math.random() * 100)
+                    cel.innerText = randomNum
+                    row.append(cel)
+                }
+            }
+        }
+
+        const tablesDiv = document.getElementById('divId')
+        tablesDiv.addEventListener('click', changeBorder)
+        tablesDiv.addEventListener('click', clickCount)
+    }
+
+    function clickCount(e) {
+        let clickedTable = e.target.closest('table')
+        if (clickedTable) {
+            let initialAttr = clickedTable.getAttribute('myClick')
+            let newAttr = parseInt(initialAttr) + 1
+            clickedTable.setAttribute('myClick', newAttr)
+            let message = `Total clicks: ${newAttr}.`
+            clickedTable.previousSibling.innerText = message
+        }
+    }
+
+    function changeBorder(e) {
+        let clickedTable = e.target.closest('table')
+        if (clickedTable) clickedTable.style.border = '2px solid red'
+    }
+
+    window.onload = function () {
+        createTables()
+    }
+</script>
+
+</html>

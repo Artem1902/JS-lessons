@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 3</title>
+</head>
+
+<h1>Task #3</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 3. Дано 5 випадковим чином згенерованих нумерованих списків з рандомними числами (кількість елементів у
+    списку випадкова від 1 до 10, елементи випадкові – від 1 до 100). При натисненні на кнопку нумеровані списки з
+    парною кількістю елементів зафарбувати у зелений колір, інші у червоний.
+</p>
+
+<script>
+
+    function createList() {
+        for (let i = 0; i < 5; i++) {
+            let elOl = document.createElement('ol')
+            document.body.append(elOl)
+            let countLi = 1 + Math.floor(Math.random() * 10)
+            for (let j = 0; j < countLi; j++) {
+                let elLi = document.createElement('li')
+                let randomNum = 1 + Math.floor(Math.random() * 100)
+                elLi.innerText = randomNum
+                elOl.append(elLi)
+            }
+        }
+    }
+
+    function changeColor() {
+        let olList = document.getElementsByTagName('ol')
+        for (const ol of olList) {
+            if (ol.children.length % 2 == 0) ol.style.backgroundColor = 'green'
+            else ol.style.backgroundColor = 'red'
+        }
+    }
+    let btn = document.createElement('button')
+    btn.innerText = 'Push!'
+    btn.addEventListener('click', changeColor)
+    document.body.append(btn)
+
+    window.onload = function () {
+        createList()
+    }
+
+</script>
+
+</html>
