@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 1</title>
+    <style>
+        .inputsDiv {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<h1>Task #1</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача. Розробити ToDo менеджер. Користувач вводить текст задачі та пріоритетність. Відображається список доданих
+    задач з можливістю видалення задач та сортування за пріоритетністю.
+</p>
+<div id="initialDiv"></div>
+
+<script>
+    class Task {
+        constructor(taskName, priority) {
+            this.taskName = taskName
+            this.priority = priority
+            this.id = 1 + Math.floor(Math.random() * 1000)
+            this.el = this.render()
+        }
+        sendEvent(eventType) {
+            const event = new CustomEvent(eventType, {
+                bubbles: true,
+                detail: { id: this.id }
+            })
+            this.el.dispatchEvent(event)
+        }
+        onDelete() {
+            this.sendEvent('delete')
+        }
+        render() {
+            this.taskDiv = document.createElement('div')
+            this.taskDiv.setAttribute('taskId', this.id)
+
+            this.taskSpanName = document.createElement('span')
+            this.taskSpanName.innerText = this.taskName
+
+            this.taskSpanPrior = document.createElement('span')
+            this.taskSpanPrior.innerText = this.priority
+
+            this.taskDiv.innerText = `${this.taskSpanName.innerText} - ${this.taskSpanPrior.innerText}. `
+
+            const taskBtn = document.createElement('button')
+            taskBtn.innerText = 'Delete'
+            taskBtn.onclick = this.onDelete.bind(this)
+            this.taskDiv.append(taskBtn)
+
+            return this.taskDiv
+        }
+    }
+
+    class NewTaskForm {
+        constructor(initialContainer) {
+            this.taskList = []
+            this.el = this.render(initialContainer)
+        }
+        onDeleteTask(event) {
+            const idToDelete = event.detail.id
+
+            this.taskList = this.taskList.filter(el => el.id !== idToDelete)
+            document.querySelector(`[taskId="${idToDelete}"]`).remove()
+
+        }
+        onSelect(value) {
+            if (value) {
+                if (value === 'increase') {
+                    this.taskList = this.taskList.sort((a, b) => b.priority - a.priority)
+                    console.log(this.taskList)
+
+                } else if (value === 'decrease') {
+                    this.taskList = this.taskList.sort((a, b) => a.priority - b.priority)
+                    console.log(this.taskList)
+
+                } else throw new Error('Something wrong with choice')
+            }
+
+            const findTaskContainer = document.getElementById('tasksContainer')
+            findTaskContainer.innerHTML = ''
+
+            for (const task of this.taskList) {
+                findTaskContainer.prepend(task.el)
+            }
+        }
+        createTextInput() {
+            const labelText = document.createElement('label')
+            labelText.innerText = 'Text of the task'
+
+            const textInput = document.createElement('input')
+            textInput.setAttribute('type', 'text')
+            textInput.setAttribute('id', 'textId')
+            labelText.append(textInput)
+
+            return labelText
+        }
+        createNumberInput() {
+            const labelNum = document.createElement('label')
+            labelNum.innerText = 'Priority of the task'
+
+            const numInput = document.createElement('input')
+            numInput.setAttribute('type', 'number')
+            numInput.setAttribute('id', 'numId')
+
+            labelNum.append(numInput)
+
+            return labelNum
+        }
+        createTasksContainer() {
+            const tasksContainer = document.createElement('div')
+            tasksContainer.setAttribute('id', 'tasksContainer')
+
+            tasksContainer.addEventListener('delete', this.onDeleteTask.bind(this))
+
+            return tasksContainer
+        }
+
+        createSelectContainer() {
+            const selectLabel = document.createElement('label')
+            selectLabel.innerText = 'Sort by'
+
+            const selectInput = document.createElement('select')
+            selectInput.addEventListener('change', (e) => this.onSelect(e.target.value))
+
+            selectLabel.append(selectInput)
+
+            const option0 = document.createElement('option')
+            option0.innerText = 'Please choose an option'
+            option0.setAttribute('value', '')
+
+            selectInput.append(option0)
+
+            const option = document.createElement('option')
+            option.innerText = 'For increase priority'
+            option.setAttribute('value', 'increase')
+            selectInput.append(option)
+
+            const option2 = document.createElement('option')
+            option2.innerText = 'For decrease priority'
+            option2.setAttribute('value', 'decrease')
+            selectInput.append(option2)
+
+            return selectLabel
+        }
+        render(initialContainer) {
+            const mainContainer = document.createElement('div')
+
+            const formContainer = document.createElement('div')
+            mainContainer.append(formContainer)
+
+            const title = document.createElement('h2')
+            title.innerText = 'New Task'
+            formContainer.append(title)
+
+            const inputsDiv = document.createElement('div')
+            inputsDiv.className = 'inputsDiv'
+
+            formContainer.append(inputsDiv)
+
+            inputsDiv.append(this.createTextInput())
+            inputsDiv.append(this.createNumberInput())
+
+            formContainer.append(this.createAddBtn())
+
+            mainContainer.append(this.createTasksContainer())
+
+            mainContainer.append(this.createSelectContainer())
+            document.getElementById(initialContainer).append(mainContainer)
+
+            return mainContainer
+        }
+
+        addTask() {
+            let text = document.getElementById('textId').value
+            let prior = parseFloat(document.getElementById('numId').value)
+
+            if (text && prior) {
+                let task = new Task(text, prior)
+                this.taskList.push(task)
+                document.getElementById('tasksContainer').prepend(task.el)
+            }
+        }
+        createAddBtn() {
+            const addBtn = document.createElement('button')
+            addBtn.innerText = 'Add task'
+            addBtn.onclick = this.addTask.bind(this)
+
+            return addBtn
+        }
+    }
+
+    window.onload = function () {
+        const todo = new NewTaskForm('initialDiv')
+    }
+</script>
+
+</html>
