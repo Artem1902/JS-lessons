@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 4</title>
+    <style>
+
+    </style>
+</head>
+
+<h1>Task #4</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 4. Користувач задає місяць навчання учня (перевіряти чи є числом, чи від 1 до 12, чи не канікули) та оцінку
+    (перевіряти чи є числом, чи від 1 до 100). Вивести чи зможе він виправити оцінку (якщо оцінка погана і це не
+    останній місяць у семестрі) . Обробку усіх помилок зробити з використанням відповідних класів.
+</p>
+<div id="initialDiv"></div>
+
+<script>
+    class IsNotNumberError extends Error {
+        constructor() {
+            super()
+            this.message = 'Must be a number!'
+            this.name = 'IsNotNumberError'
+        }
+    }
+
+    class IsToLowNumberError extends Error {
+        constructor() {
+            super()
+            this.message = 'Too low number! Must be in the range between 1 to 100!'
+            this.name = 'IsToLowNumberError'
+        }
+    }
+
+    class IsToHighNumberError extends Error {
+        constructor() {
+            super()
+            this.message = 'Too high number! Must be in the range between 1 to 100!'
+            this.name = 'IsToHighNumberError'
+        }
+    }
+
+    class IsVocationError extends Error {
+        constructor() {
+            super()
+            this.message = 'This month is vocation!'
+            this.name = 'IsVocationError'
+        }
+    }
+
+    class IsCorrectMonthError extends Error {
+        constructor() {
+            super()
+            this.message = 'Wrong number of the month! Must be in the range between 1 to 12!'
+            this.name = 'IsCorrectMonthError'
+        }
+    }
+    class IsCorrectScoreError extends Error {
+        constructor() {
+            super()
+            this.message = 'Wrong number of the score! Must be in the range between 1 to 100!'
+            this.name = 'IsCorrectScoreError'
+        }
+    }
+
+    class StudentScore {
+        #month
+        #score
+        constructor(month, score) {
+            this.Month = month
+            this.Score = score
+        }
+        get Month() {
+            return this.#month
+        }
+        set Month(value) {
+            if (isNaN(value)) {
+                throw new IsNotNumberError()
+            } else if (value === 6 || value === 7 || value === 8) { throw new IsVocationError() }
+            else if (value < 0 || value > 12) {
+                throw new IsCorrectMonthError()
+            } else this.#month = value
+        }
+
+        get Score() {
+            return this.#score
+        }
+        set Score(value) {
+            if (isNaN(value)) {
+                throw new IsNotNumberError()
+            } else if (value < 1 || value > 100) {
+                throw new IsCorrectScoreError()
+            } else this.#score = value
+        }
+        checkScore() {
+            if (this.Score < 30) {
+                if (this.Month !== 3 && this.Month !== 5 && this.Month !== 10 && this.Month !== 3 && this.Month !== 12) {
+                    document.write(`The score is ${this.Score} could be fixed in the ${this.Month} month.<br>`)
+                } else document.write(`The score is ${this.Score} could NOT be fixed in the ${this.Month} month.<br>`)
+            } else document.write(`Your score - ${this.Score} is not a bad!<br>`)
+        }
+        toString() {
+            return `The score is ${this.Score} the month is ${this.Month}.`
+        }
+    }
+
+    try {
+        const st1 = new StudentScore(3, 20)
+        st1.checkScore()
+        // const st2 = new StudentScore('aaa', 20)
+        // st2.checkScore()
+        // const st3 = new StudentScore(1, -20)
+        // st3.checkScore()
+        // const st4 = new StudentScore(1, 20)
+        // st4.checkScore()
+        // const st5 = new StudentScore(1, 80)
+        // st5.checkScore()
+    } catch (error) {
+        if (error instanceof IsNotNumberError) {
+            console.log(error.message + ' only numbers!')
+        } else if (error instanceof IsToLowNumberError) {
+            console.log(error.message + ' too low!')
+        } else if (error instanceof IsToHighNumberError) {
+            console.log(error.message + ' too high!')
+        } else if (error instanceof IsVocationError) {
+            console.log(error.message + ' vocation!')
+        } else if (error instanceof IsCorrectMonthError) {
+            console.log(error.message + ' change the month!')
+        } else if (error instanceof IsCorrectScoreError) {
+            console.log(error.message + ' change the score!')
+        } else console.log(error.message)
+
+    } finally {
+        console.log('Have a nice day!')
+
+    }
+
+</script>
+
+</html>

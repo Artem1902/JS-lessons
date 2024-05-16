@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 1</title>
+    <style>
+
+    </style>
+</head>
+
+<h1>Task #1</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 1. Створити клас Client
+</p>
+<div id="initialDiv"></div>
+
+<script>
+    class IsNotNumberError extends Error {
+        constructor() {
+            super()
+            this.message = 'Must be a number!'
+            this.name = 'IsNotNumberError'
+        }
+    }
+
+    class IsNegativeNumberError extends Error {
+        constructor() {
+            super()
+            this.message = 'Must be positive!'
+            this.name = 'IsNegativeNumberError'
+        }
+    }
+
+    class IsBalanceIsNegative extends Error {
+        constructor(balance) {
+            super()
+            this.balance = balance
+            this.message = `Your balance will be negative! You have only ${this.balance}.`
+            this.name = 'IsBalanceIsNegative'
+        }
+    }
+
+    class Client {
+        #moneyAmount
+        constructor(id, name, moneyAmount) {
+            this.id = id
+            this.name = name
+            this.MoneyAmount = moneyAmount
+        }
+        get MoneyAmount() {
+            return this.#moneyAmount
+        }
+        set MoneyAmount(value) {
+            if (isNaN(value)) throw new IsNotNumberError()
+            else this.#moneyAmount = value
+        }
+
+        addMoney(value) {
+            if (isNaN(value)) {
+                throw new IsNotNumberError()
+            } else if (value < 0) {
+                throw new IsNegativeNumberError()
+            } else return this.MoneyAmount += value
+        }
+        withdrawMoney(value) {
+            if (isNaN(value)) {
+                throw new IsNotNumberError()
+            } else if (value < 0) {
+                throw new IsNegativeNumberError()
+            } else if (this.MoneyAmount < value) {
+                throw new IsBalanceIsNegative(this.MoneyAmount)
+            } else return this.MoneyAmount -= value
+        }
+        toString() {
+            return `id: ${this.id}, name: ${this.name}, money: ${this.MoneyAmount}.<br>`
+        }
+    }
+
+    class GoldenClient extends Client {
+        constructor(id, name, moneyAmount, limit, percentage) {
+            super(id, name, moneyAmount)
+            this.limit = limit
+            this.percentage = percentage
+        }
+
+        getPenalty(debt, days) {
+
+            if (isNaN(debt)) {
+                throw new IsNotNumberError()
+            } else if (debt < 0) {
+                throw new IsNegativeNumberError()
+            } else if (isNaN(days)) {
+                throw new IsNotNumberError()
+            } else if (days < 0) {
+                throw new IsNegativeNumberError()
+            } else {
+                const penalty = debt * 2 * 15 * days / 100
+                return `Penalty - ${penalty}<br>`
+            }
+
+            //             Розрахунок пені виконується за формулою:
+            //             Пеня = С х 2ОСД х Д / 100, де
+
+            //             С – сума заборгованості за період;
+
+            //             2ОСД – подвійна облікова ставка НБУ в день прострочення;
+
+            //             Д – кількість днів прострочення.
+
+            // Розраховується так:
+
+            // ставка НБУ за період(наприклад, з 10.06.2006 до 09.06.2007 – 8, 5 % річних) множиться на два.Виходить подвійна облікова ставка НБУ.Це число ділиться на кількість днів у році – виходить ставка НБУ в день.
+        }
+        toString() {
+            return `${this.name}, limit - ${this.limit}, ${this.percentage}%.<br>`
+        }
+    }
+
+    try {
+        // const cl1 = new Client(1, 'Ivan', 1000)
+        // document.write(cl1)
+        // cl1.addMoney(150)
+        // document.write(cl1)
+        // cl1.withdrawMoney(1300)
+        // document.write(cl1)
+
+        const cl2 = new GoldenClient(1, 'Petro', 1000, 5000, 12)
+        document.write(cl2)
+        document.write(cl2.getPenalty(3000, 25))
+    } catch (error) {
+        if (error instanceof IsNotNumberError) {
+            console.log(error.message + ' only numbers')
+        } else if (error instanceof IsNegativeNumberError) {
+            console.log(error.message + ' it could not be negative')
+        } else if (error instanceof IsNegativeNumberError) {
+            console.log(error.message + ' check your balance')
+        } else console.log(error.message)
+    }
+    finally {
+        document.write('Have a nice day!')
+    }
+
+</script>
+
+</html>
