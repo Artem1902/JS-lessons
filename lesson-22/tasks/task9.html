@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 9</title>
+</head>
+
+<h1>Task #9</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 9. Користувачка планувала оформила дектретну відпустку на 200 днів (дата початку відпустки вводиться).
+    Визначити чи відпустка вже триває і чи не закінчилась.
+</p>
+<script>
+
+    function isVocation(year, month, day, term = 200) {
+        const now = new Date()
+
+        const userDayStart = new Date(year, month - 1, day)
+        const userDayEnd = new Date(userDayStart)
+
+        userDayEnd.setDate(userDayStart.getDate() + term)
+
+        return now >= userDayStart && now <= userDayEnd
+    }
+
+    const v1 = isVocation(2024, 1, 1)
+    document.write(`Is person on vocation? - ${v1}`)
+</script>
+
+</html>

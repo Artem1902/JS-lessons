@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 8</title>
+</head>
+
+<h1>Task #8</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 8. Визначити скільки пройшло секунд після заходу на сайт перш ніж користувач зробив рух мишкою.
+</p>
+<script>
+
+    function moveFn(start) {
+        const move = new Date()
+        const timeBetween = (move - start) / 1000
+        const el = document.createElement('div')
+        el.innerText = `The time between visiting site and first moving mouse is - ${timeBetween} seconds.`
+        document.body.append(el)
+    }
+
+    window.onload = function () {
+        const start = new Date()
+        const onMouseMove = () => {
+            moveFn(start)
+            window.removeEventListener('mousemove', onMouseMove)
+        }
+        window.addEventListener('mousemove', onMouseMove)
+    }
+</script>
+
+</html>

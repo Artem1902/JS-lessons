@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 7</title>
+</head>
+
+<h1>Task #7</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 7. Дано список студентів ім’я і дата народження: у формі тексту (день.місяць.рік). Знайти найстаршого
+    студента</p>
+<script>
+    function theOldest(studentsList) {
+        const newStudentList = studentsList.map(stud => {
+            let [day, month, year] = stud.birthDay.split('.').map(Number)
+            return {
+                ...stud, birthDay: new Date(year, month - 1, day).getTime()
+            }
+        })
+
+        // let oldest = newStudentList[0]
+        // for (let i = 0; i < newStudentList.length; i++) {
+        //     if (newStudentList[i].birthDay < oldest.birthDay) oldest = newStudentList[i]
+        // }
+        // console.log(oldest)
+
+        const oldest = newStudentList.reduce((prevValue, el) => {
+            return el.birthDay < prevValue.birthDay ? el : prevValue
+        }
+        )
+        return oldest
+    }
+
+
+    const studentsList = [{ name: 'Ivan', birthDay: '10.12.2000' }, { name: 'Petro', birthDay: '16.03.1999' }, { name: 'Stepan', birthDay: '01.01.2003' }, { name: 'Taras', birthDay: '24.12.2005' }]
+
+    const res = theOldest(studentsList)
+    document.write(`The oldest student is ${res.name} - ${new Date(res.birthDay).toLocaleDateString()}.`)
+</script>
+
+</html>

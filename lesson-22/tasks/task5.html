@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 5</title>
+</head>
+
+<h1>Task #5</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 5. При заході на сайт вітати користувача або відображати повідомлення про те, скільки хвилин залишилось до
+    початку робочого дня (початок о 8.00).
+</p>
+<script>
+    function greetings() {
+        const now = new Date()
+
+        let dayOfWeek = now.getDay()
+        const hours = now.getHours()
+
+        if (dayOfWeek > 0 && dayOfWeek < 6 && hours >= 8 && hours < 18) {
+            alert('Hello worker!')
+        } else {
+            const monday = new Date()
+            if (dayOfWeek === 0) {
+                monday.setDate(monday.getDate() + 1)
+            } else monday.setDate(monday.getDate() + 7 - dayOfWeek + 1)
+            monday.setHours(8, 0, 0)
+            let remainTime = monday - now
+            const remainHours = Math.floor(remainTime / (1000 * 60 * 60))
+            const remainHoursMs = remainHours * 3600000
+            const remainMin = Math.floor((remainTime - remainHoursMs) / (1000 * 60))
+            alert(`The workday will started in ${remainHours} hour(s) and ${remainMin} minute(s)`)
+        }
+    }
+
+    window.onload = function () {
+        greetings()
+    }
+</script>
+
+</html>

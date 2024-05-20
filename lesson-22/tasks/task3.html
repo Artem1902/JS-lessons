@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 3</title>
+</head>
+<h1>Task #3</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 3. Визначити скільки залишилось до кінця робочого дня (до 17.00)
+</p>
+<script>
+    function timeRemain(endHours = 17, endMinutes = 0) {
+        const now = new Date()
+
+        const currentHours = now.getHours()
+        const currentMinutes = now.getMinutes()
+
+        let minutesRemain
+        let hoursRemain
+
+        if (endHours > currentHours) {
+            hoursRemain = endHours - currentHours
+        } else if (endHours === currentHours) {
+            if (endMinutes > currentMinutes) hoursRemain = 0
+            else throw new Error('The work shift is end (minutes)')
+        } else throw new Error('The work shift is end (hours)')
+
+        if (currentMinutes >= endMinutes) {
+            minutesRemain = endMinutes + 60 - currentMinutes
+            hoursRemain--
+
+        } else minutesRemain = endMinutes - currentMinutes
+
+        return { hoursRemain, minutesRemain }
+    }
+
+    const t1 = timeRemain()
+    const { hoursRemain, minutesRemain } = t1
+    document.write(`Time to the end of the work shift is ${hoursRemain} hour(s) and ${minutesRemain} minute(s)<br>`)
+</script>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 10</title>
+</head>
+
+<h1>Task #10</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 10 . Дано дата виробництва йогурта (вводимо рік, місяць, день) та кількість днів придатності. Визначити чи є
+    він придатним на даний момент.
+</p>
+<script>
+
+    function isEdible(year, month, day, term = 10) {
+        const now = new Date()
+
+        const startProd = new Date(year, month - 1, day)
+        const endProd = new Date(startProd)
+        endProd.setDate(startProd.getDate() + term)
+        return now >= startProd && now <= endProd
+    }
+
+    const jog1 = isEdible(2024, 5, 8)
+    document.write(`Is product edible? - ${jog1}.`)
+</script>
+
+</html>

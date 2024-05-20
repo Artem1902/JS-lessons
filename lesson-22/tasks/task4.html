@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 4</title>
+</head>
+<h1>Task #4</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 4. Створити функцію, яка дозволяє визначити, чи знаходиться вказана дата і час у межах поточного тижня (від
+    понеділка 0 год, 0хв, до неділі 23год.59хв)
+</p>
+<script>
+    function isInWeek(year, month, day, hours, minutes) {
+        const userDay = new Date(year, month, day, hours, minutes)
+
+        const now = new Date()
+        const currentDay = now.getDay()
+
+        const prevMondayMs = now.setDate(now.getDate() - currentDay + 1)
+        const prevMonday = new Date(prevMondayMs)
+        const mondayDate = prevMonday.getDate()
+        const mondayMonth = prevMonday.getMonth()
+        const mondayYear = prevMonday.getFullYear()
+
+        const monday = new Date(mondayYear, mondayMonth, mondayDate, 0, 0)
+
+        const nextSundayMs = prevMonday.setDate(prevMonday.getDate() + 6)
+        const nextSunday = new Date(nextSundayMs)
+        const sundayDate = nextSunday.getDate()
+        const sundayMonth = nextSunday.getMonth()
+        const sundayYear = nextSunday.getFullYear()
+
+        const sunday = new Date(sundayYear, sundayMonth, sundayDate, 23, 59)
+
+        return (monday < userDay && userDay < sunday)
+    }
+
+    const week1 = isInWeek(2024, 4, 19, 23, 40)
+    document.write(`Is in the week? - ${week1}.`)
+</script>
+
+</html>

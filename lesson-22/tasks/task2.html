@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 2</title>
+</head>
+<h1>Task #2</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 2. Вводимо час початку процедури (процедура триває 30хв). Визначити, чи процедура ще триває.
+</p>
+<script>
+    function isProcessing(hours, minutes, term) {
+
+        const now = new Date()
+        const currentHours = now.getHours()
+        const currentMin = now.getMinutes()
+        const totalCurrentMin = currentHours * 60 + currentMin
+
+        const totalStartMin = hours * 60 + minutes
+        return ((totalStartMin + term) > totalCurrentMin)
+
+    }
+
+    const pr1 = isProcessing(5, 50, 30)
+    document.write(`Is in process? - ${pr1}.<br>`)
+
+
+    function isProcessing2({ year = 2024, month = 4, day = 17, hours, minutes }, term) {
+        const timeOnStart = new Date(year, month, day, hours, minutes)
+        const timeNow = Date.now()
+
+        timeOnStart.setMinutes(timeOnStart.getMinutes() + term)
+
+        return timeOnStart > timeNow
+    }
+
+    const time = {
+        hours: 6,
+        minutes: 20,
+    }
+
+    const pr2 = isProcessing2(time, 30)
+    document.write(`Is in process 2? - ${pr2}.`)
+
+
+</script>
+
+</html>
