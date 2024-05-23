@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 4</title>
+</head>
+
+<h1>Task #4</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 8. Дано масив студентів (піб, курс, факультет). Підрахувати кількість різних факультетів, та кількість
+    студентів кожного з курсів.
+</p>
+<script>
+    const students = [
+        { name: "John Smith", year: 1, faculty: "Computer Science" },
+        { name: "Emily Johnson", year: 2, faculty: "Biology" },
+        { name: "Michael Brown", year: 3, faculty: "Literature" },
+        { name: "Emma Davis", year: 1, faculty: "Computer Science" },
+        { name: "James Wilson", year: 4, faculty: "Physics" },
+        { name: "Olivia Martinez", year: 2, faculty: "Chemistry" },
+        { name: "Liam Garcia", year: 3, faculty: "Mathematics" },
+        { name: "Sophia Rodriguez", year: 1, faculty: "Philosophy" },
+        { name: "Benjamin Lee", year: 2, faculty: "History" },
+        { name: "Ava Walker", year: 4, faculty: "Computer Science" },
+        { name: "William Harris", year: 3, faculty: "Biology" },
+        { name: "Mia Young", year: 1, faculty: "Literature" },
+        { name: "Ethan Lewis", year: 2, faculty: "Physics" },
+        { name: "Isabella Robinson", year: 3, faculty: "Chemistry" },
+        { name: "Alexander Clark", year: 4, faculty: "Mathematics" },
+        { name: "Charlotte Rodriguez", year: 1, faculty: "Philosophy" },
+        { name: "Daniel Martinez", year: 2, faculty: "History" },
+        { name: "Victoria King", year: 3, faculty: "Computer Science" },
+        { name: "Matthew Hernandez", year: 4, faculty: "Biology" },
+        { name: "Abigail Thompson", year: 1, faculty: "Literature" }
+    ];
+
+    const facul = new Map()
+    const studOnYear = new Map()
+
+    for (const stud of students) {
+        let count = facul.get(stud.faculty) ?? 0
+        facul.set(stud.faculty, count + 1)
+        let countStud = studOnYear.get(stud.year) ?? 0
+        studOnYear.set(stud.year, countStud + 1)
+    }
+    document.write(`<hr>`)
+    for (const [key, val] of facul) {
+        document.write(`${key} - ${val}.<br>`)
+    }
+    document.write(`<hr>`)
+
+    for (const [key, val] of studOnYear) {
+        document.write(`Year ${key} - ${val} students.<br>`)
+    }
+</script>
+
+</html>

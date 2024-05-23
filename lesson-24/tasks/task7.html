@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 7</title>
+</head>
+
+<h1>Task #7</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 12. Зберігати у пам’яті список справ, які користувачу треба виконати (зберігати у localStorage). Періодично
+    випадковим чином вибирати якусь з справ і виводити користувачу (з використанням confirm). Якщо користувач натискає
+    на «Ок», то видаляти цю задачу.
+</p>
+<script>
+
+    class TaskList {
+        constructor(listTitle, taskList) {
+            this.listTitle = listTitle
+            if (!localStorage.getItem(this.listTitle)) this.setList(taskList)
+            this.showRandom()
+        }
+        showRandom() {
+            const intervalId = setInterval(() => {
+                let list = this.loadList()
+
+                if (list.length === 0) {
+                    clearInterval(intervalId)
+                    alert('All tasks are done!')
+                    return
+                }
+
+                let randomInd = Math.floor(Math.random() * list.length)
+
+                let randomTask = list[randomInd]
+                let taskConf = confirm(`Have you done it - ${randomTask}?`)
+                if (taskConf) list.splice(randomInd, 1)
+                this.setList(list)
+
+            }, 3000)
+        }
+        loadList() {
+            return JSON.parse(localStorage.getItem(this.listTitle))
+        }
+        setList(list) {
+            localStorage.setItem(this.listTitle, JSON.stringify(list))
+        }
+    }
+
+    const taskTitles = [
+        "Complete math homework",
+        "Buy groceries",
+        "Schedule dentist appointment",
+        "Prepare presentation for work",
+        "Clean the house",
+        "Finish reading book",
+        "Update resume",
+        "Exercise for 30 minutes",
+        "Plan weekend trip",
+        "Call family"
+    ];
+
+    const t1 = new TaskList('myList2', taskTitles)
+
+</script>
+
+</html>

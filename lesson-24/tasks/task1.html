@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 1</title>
+</head>
+
+<h1>Task #1</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 5. Дано список URL адрес. Підрахувати кількість адрес, що відносяться до кожного із доменів (edu, com,
+    org,...).
+</p>
+<script>
+    const urls = [
+        "https://www.random-ize.com",
+        "https://theuselessweb.com",
+        "https://www.randomlists.com",
+        "https://www.pointerpointer.com",
+        "https://www.staggeringbeauty.com",
+        "https://www.heeeeeeeey.com",
+        "https://www.cat-bounce.com",
+        "https://www.zoomquilt.org",
+        "http://www.fallingfalling.com",
+        "https://www.clicktoremove.com",
+        "http://www.eelslap.com",
+        "http://www.endless.horse",
+        "http://www.partridgegetslucky.com",
+        "http://www.sanger.dk",
+        "http://www.shadyurl.com",
+        "http://www.trypap.com",
+        "http://www.ismycomputeron.com",
+        "http://www.hat.net",
+        "http://www.nooooooooooooooo.com",
+        "http://www.koalastothemax.com"
+    ];
+    const map = new Map()
+
+    for (const url of urls) {
+        let urlArr = url.split('.')
+        let domen = urlArr[urlArr.length - 1]
+        let count = map.get(domen) ?? 0
+        map.set(domen, count + 1)
+    }
+
+    for (const [key, val] of map) {
+        document.write(`${key} - ${val}.<br>`)
+    }
+</script>
+
+</html>

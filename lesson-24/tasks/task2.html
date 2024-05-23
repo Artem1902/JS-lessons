@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 2</title>
+</head>
+
+<h1>Task #2</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 6. Дано масив книг (назва, рік видання, автор, ціна). Підрахувати загальну вартість книг для кожного із
+    авторів.
+</p>
+<script>
+    const books = [
+        { title: "To Kill a Mockingbird", year: 1960, author: "Harper Lee", price: 18.99 },
+        { title: "1984", year: 1949, author: "George Orwell", price: 15.99 },
+        { title: "Pride and Prejudice", year: 1813, author: "Jane Austen", price: 12.99 },
+        { title: "The Great Gatsby", year: 1925, author: "F. Scott Fitzgerald", price: 10.99 },
+        { title: "Moby-Dick", year: 1851, author: "Herman Melville", price: 22.99 },
+        { title: "War and Peace", year: 1869, author: "Leo Tolstoy", price: 25.99 },
+        { title: "The Catcher in the Rye", year: 1951, author: "J.D. Salinger", price: 13.99 },
+        { title: "The Hobbit", year: 1937, author: "J.R.R. Tolkien", price: 14.99 },
+        { title: "Ulysses", year: 1922, author: "James Joyce", price: 19.99 },
+        { title: "The Odyssey", year: -800, author: "Homer", price: 16.99 },
+        { title: "Crime and Punishment", year: 1866, author: "Fyodor Dostoevsky", price: 17.99 },
+        { title: "The Brothers Karamazov", year: 1880, author: "Fyodor Dostoevsky", price: 18.99 },
+        { title: "Madame Bovary", year: 1857, author: "Gustave Flaubert", price: 13.99 },
+        { title: "The Divine Comedy", year: 1320, author: "Dante Alighieri", price: 24.99 },
+        { title: "Anna Karenina", year: 1877, author: "Leo Tolstoy", price: 20.99 },
+        { title: "The Adventures of Huckleberry Finn", year: 1884, author: "Mark Twain", price: 14.99 },
+        { title: "One Hundred Years of Solitude", year: 1967, author: "Gabriel Garcia Marquez", price: 18.99 },
+        { title: "The Sound and the Fury", year: 1929, author: "William Faulkner", price: 15.99 },
+        { title: "In Search of Lost Time", year: 1913, author: "Marcel Proust", price: 21.99 },
+        { title: "Don Quixote", year: 1605, author: "Miguel de Cervantes", price: 19.99 }
+    ];
+
+    const map = new Map()
+
+    for (const book of books) {
+        let totalPrice = map.get(book.author) ?? 0
+
+        totalPrice += book.price
+
+        map.set(book.author, totalPrice)
+    }
+    for (const [key, val] of map) {
+        document.write(`${key} - ${val}<br>`)
+    }
+</script>
+
+</html>

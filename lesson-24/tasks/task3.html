@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 3</title>
+</head>
+
+<h1>Task #3</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 7. Дано інформацію про відвідувачів деякого сайту (для кожного відвідувача зберігається логін). Підрахувати
+    для кожного клієнта кількість відвідувань.
+</p>
+<script>
+    const logins = [
+        "user1",
+        "user2",
+        "user1",
+        "user3",
+        "user2",
+        "user1",
+        "user4",
+        "user2",
+        "user3",
+        "user1",
+        "user4",
+        "user2"
+    ];
+
+    const map = new Map()
+
+    for (const login of logins) {
+        let count = map.get(login) ?? 0
+        map.set(login, count + 1)
+    }
+
+    for (const [key, val] of map) {
+        document.write(`${key} - ${val} time(s)<br>`)
+    }
+</script>
+
+</html>
