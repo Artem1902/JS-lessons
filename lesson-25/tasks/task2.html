@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 2</title>
+</head>
+
+<h1>Task #2</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 2. Дано Shop -- клас, що містить список товарів масив об’єктів класу Product (назва, ціна, кількість
+    одиниць). Додати можливість ітератора до класу Shop, щоб при ітеруванні для кожного елемента виводився рядок
+    «товар-загальна вартість»
+</p>
+<script>
+    class Product {
+        constructor(name, price, quantity) {
+            this.name = name
+            this.price = price
+            this.quantity = quantity
+        }
+        [Symbol.toPrimitive](hint) {
+            let result
+            switch (hint) {
+                case 'number':
+                    result = this.price * this.quantity
+                    break
+                case 'string':
+                    result = this.name
+                    break
+                default:
+                    result = `${this.name} - ${this.price}`
+                    break
+            }
+            return result
+        }
+    }
+
+    class Shop {
+        constructor(productsList) {
+            this.productsList = productsList
+        }
+        [Symbol.iterator]() {
+            this.currentIndex = 0
+            return this
+        }
+        next() {
+            if (this.currentIndex < this.productsList.length) {
+                const currentProduct = this.productsList[this.currentIndex]
+                this.currentIndex++
+                return {
+                    done: false,
+                    value: `Product ${currentProduct.name}, total - ${currentProduct.price * currentProduct.quantity}$.`
+                }
+            } else return { done: true }
+        }
+    }
+
+    const productsList = [
+        new Product("Apple", 23.45, 10),
+        new Product("Banana", 12.99, 15),
+        new Product("Orange", 7.50, 20),
+        new Product("Tomato", 3.99, 25),
+        new Product("Potato", 2.30, 30)
+    ];
+
+    let sh1 = new Shop(productsList)
+    console.log(sh1)
+
+    for (const el of sh1) {
+        document.write(`${el}<br>`)
+    }
+</script>
+
+</html>

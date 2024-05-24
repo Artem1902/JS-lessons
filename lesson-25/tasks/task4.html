@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 4</title>
+</head>
+
+<h1>Task #4</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 4. Використовуючи один з АРІ
+    https://github.com/public-apis/public-apis#animals
+    та функцію fetch організувати завантаження та відображення даних
+</p>
+<script>
+    class FetchTest {
+        constructor(https) {
+            this.https = https
+            this.el = this.render()
+        }
+        async fetch() {
+            try {
+                const res = await fetch(this.https)
+                const data = await res.json()
+                return data.url
+            } catch (error) {
+                console.log(error)
+                return null
+            }
+        }
+        async render() {
+            const src = await this.fetch()
+            if (src) {
+                const container = document.createElement('div')
+
+                const img = document.createElement('img')
+                img.setAttribute('src', src)
+                container.append(img)
+
+                document.body.append(container)
+                return container
+            } else {
+                console.error('Error image')
+            }
+        }
+    }
+
+    const f1 = new FetchTest('https://jsonplaceholder.typicode.com/photos/2')
+
+
+</script>
+
+</html>

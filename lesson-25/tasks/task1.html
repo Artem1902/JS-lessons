@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon-32x32.png" type="image/x-icon">
+    <title>Task 1</title>
+</head>
+
+<h1>Task #1</h1>
+<h4><a href="../index.html">Back</a></h4>
+<p>
+    Задача 1. Дано клас PhoneNumber. Створити функцію перетворення до string, при якому на основі номера виводиться
+    оператор (050…. 🡪 MTC, 096… 🡪 Kyivstar, ….)
+</p>
+<script>
+    class PhoneNumber {
+        constructor(number) {
+            this.number = number
+            this.chooseOperator()
+        }
+        chooseOperator() {
+            let numberFirst3 = this.number.slice(0, 3)
+            this.operator = 'Another operator'
+            if (numberFirst3 === '050' || numberFirst3 === '066' || numberFirst3 === '095') {
+                this.operator = 'MTC';
+            } else if (numberFirst3 === '067' || numberFirst3 === '096' || numberFirst3 === '098') {
+                this.operator = 'Kyivstar';
+            }
+
+        }
+
+        [Symbol.toPrimitive](hint) {
+            let res
+            switch (hint) {
+
+                case 'string':
+                    res = this.operator
+                    break;
+                case 'number':
+                    res = Number(this.number)
+                    break
+                default:
+                    res = this.number
+                    break;
+            }
+            return res
+        }
+    }
+
+    n1 = new PhoneNumber('0981111111')
+    document.write(`0${+n1}<br>`)
+    document.write(`Operator - ${String(n1)}<br>`)
+</script>
+
+</html>
